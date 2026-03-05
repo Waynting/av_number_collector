@@ -7,7 +7,8 @@ import {
   List,
   User,
   ListVideo,
-  Compass
+  Compass,
+  Info
 } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
@@ -29,6 +30,7 @@ export function Navbar() {
     { href: "/dashboard", label: "My Playlists", icon: List },
     { href: "/surf", label: "Surf", icon: Compass },
     { href: "/profile", label: "Profile", icon: User },
+    { href: "/about", label: "About", icon: Info },
   ]
 
   return (

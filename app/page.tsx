@@ -8,9 +8,13 @@ export default function Home() {
         <h1 className="text-5xl font-bold tracking-tight text-slate-900 mb-6">
           AV Number Collector
         </h1>
-        <p className="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
+        <p className="text-xl text-slate-600 mb-3 max-w-2xl mx-auto">
           輕鬆管理你的番號收藏。建立播放清單、分享給朋友，
           並自動生成你偏好的影片網址。
+        </p>
+        <p className="text-lg text-slate-500 mb-8 max-w-2xl mx-auto">
+          Easily manage your AV code collection. Create playlists, share with friends,
+          and automatically generate URLs for your preferred video sites.
         </p>
         <div className="flex gap-4 justify-center">
           <Button asChild size="lg">
@@ -21,20 +25,29 @@ export default function Home() {
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
           <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
             <h3 className="font-semibold text-lg mb-2">📋 番號優先管理</h3>
-            <p className="text-slate-600 text-sm">
+            <p className="text-slate-600 text-sm mb-2">
               以番號為核心整理收藏，不依賴特定影片網站，永久保存你的清單。
+            </p>
+            <p className="text-slate-500 text-xs">
+              Code-first management. Organize your collection by code numbers, independent of any video site.
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
             <h3 className="font-semibold text-lg mb-2">🔗 智慧網址生成</h3>
-            <p className="text-slate-600 text-sm">
+            <p className="text-slate-600 text-sm mb-2">
               設定你喜歡的影片網站，一鍵從番號生成完整網址。
+            </p>
+            <p className="text-slate-500 text-xs">
+              Smart URL generation. Set your preferred video sites and generate URLs from codes with one click.
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
             <h3 className="font-semibold text-lg mb-2">🚀 輕鬆分享</h3>
-            <p className="text-slate-600 text-sm">
+            <p className="text-slate-600 text-sm mb-2">
               匯出文字清單或生成公開分享連結，與朋友分享你的收藏。
+            </p>
+            <p className="text-slate-500 text-xs">
+              Easy sharing. Export as text or generate public share links to share with friends.
             </p>
           </div>
         </div>
