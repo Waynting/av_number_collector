@@ -21,7 +21,7 @@ import { Plus } from "lucide-react"
 const PRESET_TEMPLATES = [
   { name: "MissAV", template: "https://missav.ws/{code}" },
   { name: "Jable", template: "https://jable.tv/videos/{code}/" },
-  { name: "Javhub", template: "https://javhub.net/video/{code}" },
+  { name: "JAVDB", template: "https://javdb.com/search?q={code}" },
 ]
 
 export function CreateTemplateDialog() {

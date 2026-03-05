@@ -87,12 +87,20 @@ export function UnifiedAddVideos({ playlistId }: { playlistId: string }) {
           .filter(r => r.success)
           .map(r => r.normalizedCode!)
 
-        const count = await bulkAddItemsToPlaylist(playlistId, validCodes)
+        // Process in batches of 50 to avoid request size limits
+        const BATCH_SIZE = 50
+        let totalAdded = 0
+
+        for (let i = 0; i < validCodes.length; i += BATCH_SIZE) {
+          const batch = validCodes.slice(i, i + BATCH_SIZE)
+          const count = await bulkAddItemsToPlaylist(playlistId, batch)
+          totalAdded += count
+        }
 
         if (stats.failed > 0) {
-          toast.success(`Added ${count} codes (${stats.failed} failed to parse)`)
+          toast.success(`Added ${totalAdded} codes (${stats.failed} failed to parse)`)
         } else {
-          toast.success(`Added ${count} video codes!`)
+          toast.success(`Added ${totalAdded} video codes!`)
         }
 
         setInput("")

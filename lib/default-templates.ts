@@ -15,7 +15,7 @@ export const DEFAULT_TEMPLATES: DefaultTemplate[] = [
   {
     id: 'default-missav',
     name: 'MissAV',
-    baseTemplate: 'https://missav.com/{code}',
+    baseTemplate: 'https://missav.ws/{code}',
     isDefault: true,
     isBuiltIn: true,
   },

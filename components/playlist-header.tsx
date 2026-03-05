@@ -157,16 +157,20 @@ export function PlaylistHeader({ playlist }: { playlist: Playlist }) {
               <Edit className="h-3.5 w-3.5 sm:h-4 sm:w-4 sm:mr-2" />
               <span className="hidden sm:inline">Edit</span>
             </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setDeleteOpen(true)}
-              className="border-gray-300 text-gray-900 hover:border-red-600 hover:text-red-600 flex-1 sm:flex-initial"
-            >
-              <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 sm:mr-2" />
-              <span className="hidden sm:inline">Delete</span>
-            </Button>
           </div>
+        </div>
+
+        {/* Delete button - bottom right */}
+        <div className="flex justify-end mt-4 pt-4 border-t border-gray-200">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setDeleteOpen(true)}
+            className="border-gray-300 text-gray-900 hover:border-red-600 hover:text-red-600"
+          >
+            <Trash2 className="h-4 w-4 mr-2" />
+            Delete
+          </Button>
         </div>
       </div>
 

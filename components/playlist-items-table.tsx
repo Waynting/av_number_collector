@@ -15,8 +15,9 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { deletePlaylistItem } from "@/app/actions/playlists"
 import { toast } from "sonner"
-import { Trash2, ListVideo, Search } from "lucide-react"
+import { Trash2, ListVideo, Search, ChevronDown, ChevronUp } from "lucide-react"
 import { Input } from "@/components/ui/input"
+import { EditNoteDialog } from "@/components/edit-note-dialog"
 
 interface PlaylistItem {
   id: string
@@ -40,6 +41,7 @@ export function PlaylistItemsTable({
   const [searchQuery, setSearchQuery] = useState("")
   const [deletingId, setDeletingId] = useState<string | null>(null)
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set())
+  const [isTableExpanded, setIsTableExpanded] = useState(true)
 
   const filteredItems = items.filter(
     (item) =>
@@ -95,8 +97,34 @@ export function PlaylistItemsTable({
 
   return (
     <div className="bg-white border border-gray-200 rounded-lg shadow-soft overflow-hidden">
-      {items.length > 0 && (
-        <div className="p-4 sm:p-6 border-b border-gray-200 bg-gray-50">
+      {/* Header with collapse toggle */}
+      <div className="p-4 sm:p-6 border-b border-gray-200 bg-gray-50">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <h3 className="text-lg font-semibold text-black">Video Codes</h3>
+            <span className="text-sm text-gray-600">({items.length})</span>
+          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setIsTableExpanded(!isTableExpanded)}
+            className="hover:bg-gray-200"
+          >
+            {isTableExpanded ? (
+              <>
+                <ChevronUp className="h-4 w-4 mr-2" />
+                Collapse
+              </>
+            ) : (
+              <>
+                <ChevronDown className="h-4 w-4 mr-2" />
+                Expand
+              </>
+            )}
+          </Button>
+        </div>
+
+        {items.length > 0 && isTableExpanded && (
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
@@ -106,10 +134,11 @@ export function PlaylistItemsTable({
               className="pl-10 shadow-sm text-sm sm:text-base border-gray-300"
             />
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
-      <div className="p-4 sm:p-6">
+      {isTableExpanded && (
+        <div className="p-4 sm:p-6">
         {filteredItems.length === 0 ? (
           <div className="empty-state">
             {items.length === 0 ? (
@@ -205,15 +234,22 @@ export function PlaylistItemsTable({
                         {item.note || <span className="text-gray-400">—</span>}
                       </TableCell>
                       <TableCell>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleDelete(item.id)}
-                          disabled={deletingId === item.id}
-                          className="hover:bg-red-50 hover:text-red-600 transition-smooth h-8 w-8 sm:h-9 sm:w-9 p-0"
-                        >
-                          <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
-                        </Button>
+                        <div className="flex items-center gap-1">
+                          <EditNoteDialog
+                            itemId={item.id}
+                            videoCode={item.normalizedCode}
+                            currentNote={item.note}
+                          />
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleDelete(item.id)}
+                            disabled={deletingId === item.id}
+                            className="hover:bg-red-50 hover:text-red-600 transition-smooth h-8 w-8 sm:h-9 sm:w-9 p-0"
+                          >
+                            <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
+                          </Button>
+                        </div>
                       </TableCell>
                     </TableRow>
                   )
@@ -222,7 +258,8 @@ export function PlaylistItemsTable({
             </Table>
           </div>
         )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }

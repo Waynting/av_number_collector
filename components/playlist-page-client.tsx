@@ -6,7 +6,6 @@ import { toast } from "sonner"
 import { SmartActionToolbar } from "./smart-action-toolbar"
 import { PlaylistManager } from "./playlist-manager"
 import { UnifiedAddVideosDialog } from "./unified-add-videos-dialog"
-import { GenerateLinksDialog } from "./generate-links-dialog"
 import { BottomActionBar } from "./bottom-action-bar"
 
 interface PlaylistItem {
@@ -40,7 +39,6 @@ export function PlaylistPageClient({
 }: PlaylistPageClientProps) {
   const [selectedItems, setSelectedItems] = useState<PlaylistItem[]>([])
   const [showAddDialog, setShowAddDialog] = useState(false)
-  const [showGenerateLinks, setShowGenerateLinks] = useState(false)
   const router = useRouter()
 
   const handleClearSelection = () => {
@@ -49,14 +47,6 @@ export function PlaylistPageClient({
 
   const handleOpenAddDialog = () => {
     setShowAddDialog(true)
-  }
-
-  const handleOpenGenerateLinks = () => {
-    if (templates.length === 0) {
-      toast.error("Please set up source templates in Settings first")
-      return
-    }
-    setShowGenerateLinks(true)
   }
 
   const handleDelete = async () => {
@@ -78,9 +68,6 @@ export function PlaylistPageClient({
     }
   }
 
-  // Items to use for generate links dialog
-  const itemsForLinks = selectedItems.length > 0 ? selectedItems : items
-
   return (
     <>
       {/* Smart Action Toolbar */}
@@ -92,7 +79,6 @@ export function PlaylistPageClient({
         playlistName={playlistName}
         onClearSelection={handleClearSelection}
         onOpenAddDialog={handleOpenAddDialog}
-        onOpenGenerateLinks={handleOpenGenerateLinks}
         onDelete={handleDelete}
       />
 
@@ -108,7 +94,6 @@ export function PlaylistPageClient({
         allItems={items}
         selectedItems={selectedItems}
         playlistName={playlistName}
-        onOpenGenerateLinks={handleOpenGenerateLinks}
       />
 
       {/* Add Videos Dialog */}
@@ -117,16 +102,6 @@ export function PlaylistPageClient({
         open={showAddDialog}
         onOpenChange={setShowAddDialog}
       />
-
-      {/* Generate Links Dialog */}
-      {showGenerateLinks && (
-        <GenerateLinksDialog
-          items={itemsForLinks}
-          templates={templates}
-          open={showGenerateLinks}
-          onOpenChange={setShowGenerateLinks}
-        />
-      )}
     </>
   )
 }

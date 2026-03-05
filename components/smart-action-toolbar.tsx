@@ -25,7 +25,6 @@ interface SmartActionToolbarProps {
   playlistName: string
   onClearSelection: () => void
   onOpenAddDialog: () => void
-  onOpenGenerateLinks: () => void
   onDelete: () => void
 }
 
@@ -37,7 +36,6 @@ export function SmartActionToolbar({
   playlistName,
   onClearSelection,
   onOpenAddDialog,
-  onOpenGenerateLinks,
   onDelete,
 }: SmartActionToolbarProps) {
   const hasSelection = selectedItems.length > 0

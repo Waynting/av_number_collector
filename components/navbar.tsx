@@ -5,11 +5,9 @@ import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import {
   List,
-  Settings,
-  Share2,
-  LogOut,
   User,
-  ListVideo
+  ListVideo,
+  Compass
 } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
@@ -29,7 +27,7 @@ export function Navbar() {
 
   const navItems = [
     { href: "/dashboard", label: "My Playlists", icon: List },
-    { href: "/settings/sources", label: "Sources", icon: Settings },
+    { href: "/surf", label: "Surf", icon: Compass },
     { href: "/profile", label: "Profile", icon: User },
   ]
 
@@ -77,8 +75,7 @@ export function Navbar() {
               onClick={handleSignOut}
               className="text-gray-400 hover:text-white hover:bg-gray-900"
             >
-              <LogOut className="h-4 w-4 sm:mr-2" />
-              <span className="hidden sm:inline">Sign Out</span>
+              Sign Out
             </Button>
           </div>
         </div>
