@@ -1,0 +1,64 @@
+// This is your Prisma schema file
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid()) @db.Uuid
+  email     String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+
+  playlists       Playlist[]
+  sourceTemplates SourceTemplate[]
+
+  @@map("users")
+}
+
+model Playlist {
+  id          String   @id @default(uuid()) @db.Uuid
+  userId      String   @map("user_id") @db.Uuid
+  name        String
+  description String?
+  isPublic    Boolean  @default(false) @map("is_public")
+  shareSlug   String?  @unique @map("share_slug")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  user  User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items PlaylistItem[]
+
+  @@map("playlists")
+}
+
+model PlaylistItem {
+  id             String   @id @default(uuid()) @db.Uuid
+  playlistId     String   @map("playlist_id") @db.Uuid
+  videoCode      String   @map("video_code")
+  normalizedCode String   @map("normalized_code")
+  note           String?
+  position       Int
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  playlist Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
+
+  @@map("playlist_items")
+}
+
+model SourceTemplate {
+  id           String   @id @default(uuid()) @db.Uuid
+  userId       String   @map("user_id") @db.Uuid
+  name         String
+  baseTemplate String   @map("base_template")
+  isDefault    Boolean  @default(false) @map("is_default")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("source_templates")
+}
