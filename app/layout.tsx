@@ -6,8 +6,8 @@ import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "AV Playlist Manager",
-  description: "Organize and manage your video code collections",
+  title: "AV Number Collector",
+  description: "輕鬆管理你的番號收藏",
 };
 
 export default function RootLayout({

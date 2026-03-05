@@ -53,7 +53,7 @@ export default async function SharedPlaylistPage({ params }: PageProps) {
         <div className="max-w-5xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link href="/" className="text-white font-bold text-lg hover:text-gray-300 transition-colors">
-              AV Playlist Manager
+              AV Number Collector
             </Link>
             {!user && (
               <Link href="/login">

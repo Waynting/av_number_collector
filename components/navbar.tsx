@@ -45,7 +45,7 @@ export function Navbar() {
                 <div className="w-7 h-7 bg-white rounded-md flex items-center justify-center">
                   <ListVideo className="h-4 w-4 text-black" />
                 </div>
-                <span className="hidden sm:inline">AV Playlist Manager</span>
+                <span className="hidden sm:inline">AV Number Collector</span>
               </Link>
 
               {/* Desktop Navigation */}

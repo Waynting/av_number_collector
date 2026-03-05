@@ -90,10 +90,10 @@ export default function LoginPage() {
       <div className="w-full max-w-md space-y-8 px-4">
         <div className="text-center">
           <Link href="/" className="text-3xl font-bold text-slate-900">
-            AV Playlist Manager
+            AV Number Collector
           </Link>
           <p className="mt-2 text-slate-600">
-            Sign in to manage your collections
+            登入以管理你的番號收藏
           </p>
         </div>
 

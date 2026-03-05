@@ -6,7 +6,7 @@ export default function Home() {
     <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
       <div className="max-w-4xl mx-auto px-4 py-16 text-center">
         <h1 className="text-5xl font-bold tracking-tight text-slate-900 mb-6">
-          AV Playlist Manager
+          AV Number Collector
         </h1>
         <p className="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
           輕鬆管理你的番號收藏。建立播放清單、分享給朋友，
