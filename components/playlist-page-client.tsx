@@ -6,6 +6,7 @@ import { toast } from "sonner"
 import { SmartActionToolbar } from "./smart-action-toolbar"
 import { PlaylistManager } from "./playlist-manager"
 import { UnifiedAddVideosDialog } from "./unified-add-videos-dialog"
+import { trackDeleteItems } from "@/lib/analytics"
 
 interface PlaylistItem {
   id: string
@@ -59,6 +60,13 @@ export function PlaylistPageClient({
       // Import the delete action
       const { bulkDeletePlaylistItems } = await import("@/app/actions/playlists")
       await bulkDeletePlaylistItems(selectedItems.map(item => item.id))
+
+      // Track event
+      trackDeleteItems({
+        playlist_id: playlistId,
+        item_count: selectedItems.length,
+      })
+
       toast.success(`Deleted ${selectedItems.length} ${selectedItems.length === 1 ? 'item' : 'items'}!`)
       setSelectedItems([])
       router.refresh()

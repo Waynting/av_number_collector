@@ -6,6 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Link as LinkIcon, Copy, Check, Plus } from "lucide-react"
 import { toast } from "sonner"
 import { DEFAULT_TEMPLATES } from "@/lib/default-templates"
+import { trackGenerateLinks } from "@/lib/analytics"
 
 interface PlaylistItem {
   id: string
@@ -48,6 +49,13 @@ export function LinkGeneratorPopover({ items, userTemplates = [], trigger }: Lin
     const linksText = links.join('\n')
 
     navigator.clipboard.writeText(linksText)
+
+    // Track event
+    trackGenerateLinks({
+      source_name: template.name,
+      item_count: items.length,
+      is_single_item: items.length === 1,
+    })
 
     // Show visual feedback
     setCopiedSource(template.id)

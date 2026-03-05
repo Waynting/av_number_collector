@@ -14,6 +14,7 @@ import {
   getParseStats,
   type ParseResult
 } from "@/lib/url-parser"
+import { trackAddItems } from "@/lib/analytics"
 
 type Mode = "single" | "bulk"
 
@@ -66,6 +67,14 @@ export function UnifiedAddVideos({ playlistId }: { playlistId: string }) {
       setLoading(true)
       try {
         await addItemToPlaylist(playlistId, singleResult.normalizedCode!)
+
+        // Track event
+        trackAddItems({
+          playlist_id: playlistId,
+          item_count: 1,
+          method: "url_parse",
+        })
+
         toast.success("Video added!")
         setInput("")
         setSingleResult(null)
@@ -96,6 +105,13 @@ export function UnifiedAddVideos({ playlistId }: { playlistId: string }) {
           const count = await bulkAddItemsToPlaylist(playlistId, batch)
           totalAdded += count
         }
+
+        // Track event
+        trackAddItems({
+          playlist_id: playlistId,
+          item_count: totalAdded,
+          method: "bulk",
+        })
 
         if (stats.failed > 0) {
           toast.success(`Added ${totalAdded} codes (${stats.failed} failed to parse)`)

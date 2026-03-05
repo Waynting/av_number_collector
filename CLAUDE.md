@@ -202,7 +202,27 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=   # From Supabase project settings
 SUPABASE_SERVICE_ROLE_KEY=       # From Supabase project settings
 DATABASE_URL=                     # Postgres connection string
 NEXT_PUBLIC_APP_URL=             # App URL for OAuth redirects
+NEXT_PUBLIC_GA_MEASUREMENT_ID=   # Google Analytics 4 Measurement ID (optional)
 ```
+
+**Google Analytics 4 Setup:**
+The app uses `@next/third-parties/google` for GA4 integration. To enable tracking:
+1. Create a GA4 property at https://analytics.google.com/
+2. Get your Measurement ID (format: `G-XXXXXXXXXX`)
+3. Add it to `.env.local` as `NEXT_PUBLIC_GA_MEASUREMENT_ID`
+4. Tracking will automatically start on all pages and custom events
+
+**Tracked Events:**
+- `add_items_to_playlist`: Track when users add items (single/bulk)
+- `generate_links`: Track link generation by source
+- `copy_codes`: Track code copying with selection info
+- `delete_items`: Track item deletions
+- `search_public_playlists`: Track surf page searches
+- `copy_public_playlist`: Track playlist copying from surf page
+- `copy_code_from_share`: Track code copying from share pages
+- `copy_url_from_share`: Track URL copying from share pages
+
+Custom events are defined in `lib/analytics.ts`.
 
 ## Key Conventions
 

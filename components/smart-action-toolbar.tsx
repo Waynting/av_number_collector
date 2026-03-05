@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Plus, Trash2, Copy } from "lucide-react"
 import { toast } from "sonner"
+import { trackCopyCodes } from "@/lib/analytics"
 
 interface PlaylistItem {
   id: string
@@ -46,6 +47,13 @@ export function SmartActionToolbar({
     const itemsToUse = hasSelection ? selectedItems : allItems
     const codes = itemsToUse.map(item => item.normalizedCode).join(' ')
     navigator.clipboard.writeText(codes)
+
+    // Track event
+    trackCopyCodes({
+      item_count: itemsToUse.length,
+      has_selection: hasSelection,
+    })
+
     toast.success(`Copied ${itemsToUse.length} ${itemsToUse.length === 1 ? 'code' : 'codes'}!`)
   }
 

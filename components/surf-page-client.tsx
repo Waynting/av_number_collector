@@ -9,6 +9,7 @@ import { searchPublicPlaylists } from "@/app/actions/surf"
 import { CopyPlaylistDialog } from "@/components/copy-playlist-dialog"
 import { FavoriteButton } from "@/components/favorite-button"
 import { checkIsFavorited } from "@/app/actions/favorites"
+import { trackSearchPublicPlaylists } from "@/lib/analytics"
 
 interface PlaylistItem {
   normalizedCode: string
@@ -45,6 +46,12 @@ export function SurfPageClient({ initialPlaylists }: SurfPageClientProps) {
     startTransition(async () => {
       const results = await searchPublicPlaylists(searchQuery)
       setPlaylists(results)
+
+      // Track search event
+      trackSearchPublicPlaylists({
+        query: searchQuery,
+        results_count: results.length,
+      })
     })
   }
 

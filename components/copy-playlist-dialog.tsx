@@ -17,6 +17,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Copy, Loader2 } from "lucide-react"
 import { toast } from "sonner"
 import { copyPlaylistToUser } from "@/app/actions/surf"
+import { trackCopyPublicPlaylist } from "@/lib/analytics"
 
 interface CopyPlaylistDialogProps {
   playlistId: string
@@ -51,6 +52,12 @@ export function CopyPlaylistDialog({
         newName.trim(),
         description.trim() || undefined
       )
+
+      // Track event
+      trackCopyPublicPlaylist({
+        source_playlist_id: playlistId,
+        item_count: itemCount,
+      })
 
       toast.success(
         `Successfully copied ${itemCount} ${itemCount === 1 ? "code" : "codes"} to "${newName}"!`

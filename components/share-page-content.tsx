@@ -8,6 +8,7 @@ import { AddItemsToPlaylistDialog } from "@/components/add-items-to-playlist-dia
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
+import { trackEvent } from "@/lib/analytics"
 
 interface PlaylistItem {
   id: string
@@ -70,6 +71,13 @@ export function SharePageContent({
     navigator.clipboard.writeText(code)
     setCopiedCode(code)
     toast.success(`Copied ${code}!`)
+
+    // Track event
+    trackEvent("copy_code_from_share", {
+      playlist_id: playlistId,
+      code: code,
+    })
+
     setTimeout(() => setCopiedCode(null), 2000)
   }
 
@@ -77,6 +85,13 @@ export function SharePageContent({
     navigator.clipboard.writeText(url)
     setCopiedUrl(url)
     toast.success(`Copied ${sourceName} link!`)
+
+    // Track event
+    trackEvent("copy_url_from_share", {
+      playlist_id: playlistId,
+      source_name: sourceName,
+    })
+
     setTimeout(() => setCopiedUrl(null), 2000)
   }
 
