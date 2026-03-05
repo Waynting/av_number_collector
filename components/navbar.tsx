@@ -8,7 +8,8 @@ import {
   Settings,
   Share2,
   LogOut,
-  User
+  User,
+  ListVideo
 } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
