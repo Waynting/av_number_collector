@@ -2,7 +2,7 @@ import { Navbar } from "@/components/navbar"
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 
-export default async function AuthenticatedLayout({
+export default async function PlaylistLayout({
   children,
 }: {
   children: React.ReactNode

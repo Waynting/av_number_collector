@@ -2,7 +2,7 @@ import { createClient } from "@/lib/supabase/server"
 import { prisma } from "@/lib/prisma"
 import { notFound, redirect } from "next/navigation"
 import { AddCodeForm } from "@/components/add-code-form"
-import { PlaylistItemsTable } from "@/components/playlist-items-table"
+import { PlaylistManager } from "@/components/playlist-manager"
 import { PlaylistHeader } from "@/components/playlist-header"
 import { BulkAddDialog } from "@/components/bulk-add-dialog"
 import { ExportButtons } from "@/components/export-buttons"
@@ -47,15 +47,21 @@ export default async function PlaylistPage({ params }: PageProps) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 sm:space-y-8">
       <PlaylistHeader playlist={playlist} />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
-          <PlaylistItemsTable playlistId={playlist.id} items={playlist.items} />
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+        {/* Main content - takes 8 columns on large screens */}
+        <div className="lg:col-span-8 xl:col-span-8">
+          <PlaylistManager
+            playlistId={playlist.id}
+            items={playlist.items}
+            templates={templates}
+          />
         </div>
 
-        <div className="space-y-4">
+        {/* Sidebar - takes 4 columns on large screens */}
+        <div className="lg:col-span-4 xl:col-span-4 space-y-4 lg:space-y-6">
           <AddCodeForm playlistId={playlist.id} />
           <BulkAddDialog playlistId={playlist.id} />
           <GenerateLinksDialog items={playlist.items} templates={templates} />

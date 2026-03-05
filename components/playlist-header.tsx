@@ -80,44 +80,76 @@ export function PlaylistHeader({ playlist }: { playlist: Playlist }) {
 
   return (
     <>
-      <div className="flex items-start justify-between">
-        <div className="flex-1">
-          <Button variant="ghost" asChild className="mb-4">
-            <Link href="/dashboard">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Dashboard
-            </Link>
-          </Button>
-          <div className="flex items-center gap-3">
-            <h1 className="text-3xl font-bold text-slate-900">{playlist.name}</h1>
-            {playlist.isPublic && (
-              <span className="inline-flex items-center gap-1 text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">
-                <Globe className="h-3 w-3" />
-                Public
-              </span>
-            )}
-          </div>
-          {playlist.description && (
-            <p className="text-slate-600 mt-2">{playlist.description}</p>
-          )}
-          <p className="text-sm text-slate-500 mt-2">
-            {playlist._count.items} {playlist._count.items === 1 ? 'item' : 'items'}
-          </p>
-        </div>
+      {/* Breadcrumb */}
+      <div className="mb-6">
+        <Button variant="ghost" asChild className="text-slate-600 hover:text-slate-900 -ml-2">
+          <Link href="/dashboard">
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Playlists
+          </Link>
+        </Button>
+      </div>
 
-        <div className="flex gap-2">
-          <Button variant="outline" size="sm" onClick={togglePublic}>
-            <Share2 className="h-4 w-4 mr-2" />
-            {playlist.isPublic ? "Make Private" : "Make Public"}
-          </Button>
-          <Button variant="outline" size="sm" onClick={() => setEditOpen(true)}>
-            <Edit className="h-4 w-4 mr-2" />
-            Edit
-          </Button>
-          <Button variant="outline" size="sm" onClick={() => setDeleteOpen(true)}>
-            <Trash2 className="h-4 w-4 mr-2" />
-            Delete
-          </Button>
+      {/* Header Card */}
+      <div className="bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-6 lg:p-8 shadow-soft mb-6 sm:mb-8">
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 lg:gap-6">
+          <div className="flex-1 min-w-0">
+            {/* Title and badges */}
+            <div className="flex items-center gap-2 sm:gap-3 flex-wrap mb-3">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight break-words">{playlist.name}</h1>
+              {playlist.isPublic && (
+                <span className="inline-flex items-center gap-1.5 text-xs font-medium bg-blue-500 text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full shadow-sm flex-shrink-0">
+                  <Globe className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                  Public
+                </span>
+              )}
+            </div>
+
+            {/* Description */}
+            {playlist.description && (
+              <p className="text-slate-600 text-sm sm:text-base lg:text-lg mb-4 max-w-2xl leading-relaxed">{playlist.description}</p>
+            )}
+
+            {/* Metadata */}
+            <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm text-slate-500">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></div>
+                <span className="font-medium text-slate-700">{playlist._count.items}</span>
+                <span>{playlist._count.items === 1 ? 'video code' : 'video codes'}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Action buttons */}
+          <div className="flex flex-wrap sm:flex-nowrap gap-2 lg:ml-6">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={togglePublic}
+              className="shadow-sm hover:shadow transition-smooth flex-1 sm:flex-initial"
+            >
+              <Share2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 sm:mr-2" />
+              <span className="hidden sm:inline">{playlist.isPublic ? "Private" : "Public"}</span>
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setEditOpen(true)}
+              className="shadow-sm hover:shadow transition-smooth flex-1 sm:flex-initial"
+            >
+              <Edit className="h-3.5 w-3.5 sm:h-4 sm:w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Edit</span>
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setDeleteOpen(true)}
+              className="shadow-sm hover:shadow transition-smooth text-red-600 hover:text-red-700 hover:border-red-300 flex-1 sm:flex-initial"
+            >
+              <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Delete</span>
+            </Button>
+          </div>
         </div>
       </div>
 

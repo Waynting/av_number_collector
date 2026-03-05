@@ -1,7 +1,6 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Download, Copy, Link as LinkIcon } from "lucide-react"
 import { toast } from "sonner"
 
@@ -46,27 +45,46 @@ export function ExportButtons({
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-lg">Export & Share</CardTitle>
-        <CardDescription>Download or share your playlist</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-3">
-        <Button variant="outline" className="w-full" onClick={handleCopyAll}>
-          <Copy className="h-4 w-4 mr-2" />
-          Copy All Codes
+    <div className="bg-white border border-slate-200 rounded-2xl shadow-soft overflow-hidden">
+      <div className="p-6 bg-gradient-to-br from-orange-50 to-amber-50 border-b border-slate-200">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="p-2 bg-orange-500 rounded-lg">
+            <Download className="h-5 w-5 text-white" />
+          </div>
+          <h3 className="text-lg font-bold text-slate-900">Export & Share</h3>
+        </div>
+        <p className="text-sm text-slate-600">Download or share your playlist</p>
+      </div>
+      <div className="p-6 space-y-3">
+        <Button
+          variant="outline"
+          className="w-full justify-start shadow-sm hover:shadow hover:bg-slate-50 transition-smooth"
+          onClick={handleCopyAll}
+        >
+          <Copy className="h-4 w-4 mr-3 text-slate-600" />
+          <span className="flex-1 text-left">Copy All Codes</span>
+          <span className="text-xs text-slate-500">{items.length}</span>
         </Button>
-        <Button variant="outline" className="w-full" onClick={handleDownload}>
-          <Download className="h-4 w-4 mr-2" />
-          Export as TXT
+        <Button
+          variant="outline"
+          className="w-full justify-start shadow-sm hover:shadow hover:bg-slate-50 transition-smooth"
+          onClick={handleDownload}
+        >
+          <Download className="h-4 w-4 mr-3 text-slate-600" />
+          <span className="flex-1 text-left">Export as TXT</span>
         </Button>
         {isPublic && shareSlug && (
-          <Button variant="outline" className="w-full" onClick={handleCopyShareLink}>
-            <LinkIcon className="h-4 w-4 mr-2" />
-            Copy Share Link
+          <Button
+            variant="outline"
+            className="w-full justify-start shadow-sm hover:shadow hover:bg-blue-50 hover:border-blue-300 transition-smooth group"
+            onClick={handleCopyShareLink}
+          >
+            <LinkIcon className="h-4 w-4 mr-3 text-slate-600 group-hover:text-blue-600" />
+            <span className="flex-1 text-left">Copy Share Link</span>
+            <span className="text-xs px-2 py-0.5 bg-blue-100 text-blue-700 rounded-md font-medium">Public</span>
           </Button>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   )
 }

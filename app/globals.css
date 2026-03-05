@@ -5,30 +5,45 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 222.2 47.4% 11.2%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 222.2 47.4% 11.2%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+
+    /* Modern blue primary */
+    --primary: 221.2 83.2% 53.3%;
     --primary-foreground: 210 40% 98%;
+
+    /* Refined secondary */
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+
+    /* Better muted colors */
+    --muted: 217.2 32.6% 96%;
+    --muted-foreground: 215 16.3% 46.9%;
+
+    /* Accent blue */
+    --accent: 217.2 91.2% 59.8%;
+    --accent-foreground: 210 40% 98%;
+
+    /* Destructive */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
+
+    /* Borders and inputs */
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 221.2 83.2% 53.3%;
     --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+
+    /* Success green */
+    --success: 142.1 76.2% 36.3%;
+    --success-foreground: 0 0% 100%;
+
+    /* Additional design tokens */
+    --surface: 0 0% 98%;
+    --elevated: 0 0% 100%;
   }
 
   .dark {
@@ -64,6 +79,64 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+  }
+
+  /* Better scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400;
+  }
+}
+
+@layer utilities {
+  /* Gradient backgrounds */
+  .gradient-bg {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--surface)) 100%);
+  }
+
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+  }
+
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-white/80 backdrop-blur-sm;
+  }
+
+  /* Better shadows */
+  .shadow-soft {
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.08), 0 1px 3px -1px rgba(0, 0, 0, 0.04);
+  }
+
+  .shadow-elevated {
+    box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.10), 0 2px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Smooth transitions */
+  .transition-smooth {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Empty state styles */
+  .empty-state {
+    @apply flex flex-col items-center justify-center py-16 px-4 text-center;
+  }
+
+  /* Action panel */
+  .action-panel {
+    @apply bg-white border border-slate-200 rounded-xl p-6 shadow-soft transition-smooth hover:shadow-elevated;
   }
 }

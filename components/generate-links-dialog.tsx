@@ -12,7 +12,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { toast } from "sonner"
 import { Link as LinkIcon, Copy } from "lucide-react"
 import {
@@ -34,10 +33,16 @@ interface SourceTemplate {
 interface GenerateLinksDialogProps {
   items: Array<{ normalizedCode: string }>
   templates: SourceTemplate[]
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
 }
 
-export function GenerateLinksDialog({ items, templates }: GenerateLinksDialogProps) {
-  const [open, setOpen] = useState(false)
+export function GenerateLinksDialog({ items, templates, open: controlledOpen, onOpenChange }: GenerateLinksDialogProps) {
+  const [internalOpen, setInternalOpen] = useState(false)
+
+  // Use controlled or internal state
+  const open = controlledOpen !== undefined ? controlledOpen : internalOpen
+  const setOpen = onOpenChange || setInternalOpen
   const [selectedTemplate, setSelectedTemplate] = useState<SourceTemplate | null>(
     templates.find(t => t.isDefault) || templates[0] || null
   )
@@ -63,45 +68,50 @@ export function GenerateLinksDialog({ items, templates }: GenerateLinksDialogPro
 
   if (templates.length === 0) {
     return (
-      <Card className="border-dashed">
-        <CardHeader>
-          <CardTitle className="text-lg">Generate Links</CardTitle>
-          <CardDescription>
-            Set up source templates in Settings first
-          </CardDescription>
-        </CardHeader>
-      </Card>
+      <div className="bg-slate-50 border-2 border-dashed border-slate-300 rounded-2xl p-6">
+        <div className="flex items-center gap-3 mb-2 opacity-50">
+          <div className="p-2 bg-slate-300 rounded-lg">
+            <LinkIcon className="h-5 w-5 text-slate-600" />
+          </div>
+          <h3 className="text-lg font-bold text-slate-700">Generate Links</h3>
+        </div>
+        <p className="text-sm text-slate-600">
+          Set up source templates in Settings first
+        </p>
+      </div>
     )
   }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Card className="cursor-pointer hover:shadow-md transition-shadow">
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <LinkIcon className="h-5 w-5" />
-              Generate Links
-            </CardTitle>
-            <CardDescription>
+      {controlledOpen === undefined && (
+        <DialogTrigger asChild>
+          <div className="bg-gradient-to-br from-green-50 to-teal-50 border border-green-300 rounded-2xl p-6 cursor-pointer transition-smooth hover:shadow-elevated hover:border-green-400 group">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="p-2 bg-green-500 rounded-lg group-hover:scale-110 transition-smooth">
+                <LinkIcon className="h-5 w-5 text-white" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900">Generate Links</h3>
+            </div>
+            <p className="text-sm text-slate-600">
               Convert codes to URLs using your templates
-            </CardDescription>
-          </CardHeader>
-        </Card>
-      </DialogTrigger>
+            </p>
+          </div>
+        </DialogTrigger>
+      )}
       <DialogContent className="max-w-3xl max-h-[80vh]">
         <DialogHeader>
-          <DialogTitle>Generate Links from Template</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-xl">Generate Links from Template</DialogTitle>
+          <DialogDescription className="text-slate-600">
             Select a source template to generate full URLs from your video codes
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-4 py-4">
           <div className="space-y-2">
-            <Label>Source Template</Label>
+            <Label className="text-sm font-semibold text-slate-700">Source Template</Label>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="w-full justify-between">
+                <Button variant="outline" className="w-full justify-between shadow-sm">
                   {selectedTemplate ? selectedTemplate.name : "Select template..."}
                 </Button>
               </DropdownMenuTrigger>
@@ -115,28 +125,29 @@ export function GenerateLinksDialog({ items, templates }: GenerateLinksDialogPro
                   >
                     {template.name}
                     {template.isDefault && (
-                      <span className="ml-2 text-xs text-slate-500">(Default)</span>
+                      <span className="ml-2 text-xs text-green-600 font-medium">(Default)</span>
                     )}
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
             {selectedTemplate && (
-              <p className="text-xs text-slate-500 font-mono">
+              <p className="text-xs text-slate-600 font-mono bg-slate-50 px-3 py-2 rounded-lg border border-slate-200">
                 {selectedTemplate.baseTemplate}
               </p>
             )}
           </div>
 
-          <Button onClick={handleGenerate} className="w-full">
+          <Button onClick={handleGenerate} className="w-full shadow-sm">
+            <LinkIcon className="h-4 w-4 mr-2" />
             Generate {items.length} Links
           </Button>
 
           {generatedLinks.length > 0 && (
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <Label>Generated Links</Label>
-                <Button variant="outline" size="sm" onClick={handleCopy}>
+                <Label className="text-sm font-semibold text-slate-700">Generated Links</Label>
+                <Button variant="outline" size="sm" onClick={handleCopy} className="shadow-sm">
                   <Copy className="h-4 w-4 mr-2" />
                   Copy All
                 </Button>
@@ -145,8 +156,14 @@ export function GenerateLinksDialog({ items, templates }: GenerateLinksDialogPro
                 value={generatedLinks.join('\n')}
                 readOnly
                 rows={15}
-                className="font-mono text-xs"
+                className="font-mono text-xs shadow-sm border-slate-300"
               />
+              <div className="flex items-center gap-2 text-xs text-slate-600">
+                <div className="px-2.5 py-1 bg-green-100 border border-green-300 rounded-md font-medium text-green-700">
+                  {generatedLinks.length} links
+                </div>
+                <span className="text-slate-500">generated successfully</span>
+              </div>
             </div>
           )}
         </div>

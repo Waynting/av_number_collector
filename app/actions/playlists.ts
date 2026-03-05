@@ -226,3 +226,43 @@ export async function updatePlaylistItemNote(itemId: string, note: string) {
   revalidatePath(`/playlist/${item.playlistId}`)
   return updated
 }
+
+export async function bulkDeletePlaylistItems(itemIds: string[]) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) {
+    throw new Error("Unauthorized")
+  }
+
+  if (itemIds.length === 0) {
+    return 0
+  }
+
+  // Verify ownership of all items through their playlists
+  const items = await prisma.playlistItem.findMany({
+    where: { id: { in: itemIds } },
+    include: { playlist: true },
+  })
+
+  // Check all items belong to user's playlists
+  const unauthorized = items.some(item => item.playlist.userId !== user.id)
+  if (unauthorized) {
+    throw new Error("Unauthorized to delete some items")
+  }
+
+  // Get playlist IDs to revalidate
+  const playlistIds = [...new Set(items.map(item => item.playlistId))]
+
+  // Delete all items
+  await prisma.playlistItem.deleteMany({
+    where: { id: { in: itemIds } },
+  })
+
+  // Revalidate all affected playlists
+  playlistIds.forEach(playlistId => {
+    revalidatePath(`/playlist/${playlistId}`)
+  })
+
+  return itemIds.length
+}
