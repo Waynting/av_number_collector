@@ -6,7 +6,7 @@ import { toast } from "sonner"
 
 export function CopyCodesButton({ codes }: { codes: string[] }) {
   const handleCopy = () => {
-    const text = codes.join('\n')
+    const text = codes.join(' ')
     navigator.clipboard.writeText(text)
     toast.success(`Copied ${codes.length} codes to clipboard!`)
   }

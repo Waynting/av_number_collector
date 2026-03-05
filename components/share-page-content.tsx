@@ -170,6 +170,30 @@ export function SharePageContent({
               {item.note && (
                 <StickyNote className="h-4 w-4 text-gray-400" />
               )}
+              {/* Add to Playlist Button - Always show for authenticated users */}
+              {isAuthenticated && !isOwner ? (
+                <AddItemsToPlaylistDialog
+                  sourcePlaylistId={playlistId}
+                  items={[item]}
+                  trigger={
+                    <button
+                      className="px-3 py-1.5 bg-white text-black hover:bg-gray-200 transition-all rounded text-xs font-semibold whitespace-nowrap"
+                      title="Add to my playlist"
+                    >
+                      加入清單
+                    </button>
+                  }
+                />
+              ) : !isAuthenticated ? (
+                <Link href="/login">
+                  <button
+                    className="px-3 py-1.5 bg-white text-black hover:bg-gray-200 transition-all rounded text-xs font-semibold whitespace-nowrap"
+                    title="Sign in to add to your playlist"
+                  >
+                    加入清單
+                  </button>
+                </Link>
+              ) : null}
               {/* Copy Code Button */}
               <button
                 onClick={() => handleCopyCode(item.normalizedCode)}
@@ -208,30 +232,11 @@ export function SharePageContent({
                 <p className="text-xs font-semibold text-gray-600">AVAILABLE SOURCES</p>
                 <span className="text-xs text-gray-500">({DEFAULT_TEMPLATES.length})</span>
               </div>
-              <div className="flex items-center gap-2">
-                {isAuthenticated && !isOwner && (
-                  <AddItemsToPlaylistDialog
-                    sourcePlaylistId={playlistId}
-                    items={[item]}
-                    trigger={
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="h-7 text-xs hover:bg-gray-100"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <Plus className="h-3 w-3 mr-1" />
-                        Add
-                      </Button>
-                    }
-                  />
-                )}
-                {isExpanded ? (
-                  <ChevronUp className="h-5 w-5 text-gray-600" />
-                ) : (
-                  <ChevronDown className="h-5 w-5 text-gray-600" />
-                )}
-              </div>
+              {isExpanded ? (
+                <ChevronUp className="h-5 w-5 text-gray-600" />
+              ) : (
+                <ChevronDown className="h-5 w-5 text-gray-600" />
+              )}
             </button>
 
             {isExpanded && (

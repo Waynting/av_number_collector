@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useTransition } from "react"
+import { useState, useTransition, useEffect } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Search, ExternalLink, User, Copy, Heart } from "lucide-react"
@@ -116,12 +116,12 @@ function PlaylistCard({
   const [isCheckingFavorite, setIsCheckingFavorite] = useState(true)
 
   // Check if favorited on mount
-  useState(() => {
+  useEffect(() => {
     checkIsFavorited(playlist.id).then((result) => {
       setIsFavorited(result)
       setIsCheckingFavorite(false)
     })
-  })
+  }, [playlist.id])
 
   return (
     <div className="bg-white border-2 border-black rounded-lg shadow-soft hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all overflow-hidden">

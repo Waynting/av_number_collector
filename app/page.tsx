@@ -9,35 +9,32 @@ export default function Home() {
           AV Playlist Manager
         </h1>
         <p className="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
-          Organize your video code collections with ease. Create playlists, share with friends,
-          and auto-complete with your preferred sources.
+          輕鬆管理你的番號收藏。建立播放清單、分享給朋友，
+          並自動生成你偏好的影片網址。
         </p>
         <div className="flex gap-4 justify-center">
           <Button asChild size="lg">
             <Link href="/login">Get Started</Link>
           </Button>
-          <Button asChild size="lg" variant="outline">
-            <Link href="/dashboard">Dashboard</Link>
-          </Button>
         </div>
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
           <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-            <h3 className="font-semibold text-lg mb-2">📋 ID-First Management</h3>
+            <h3 className="font-semibold text-lg mb-2">📋 番號優先管理</h3>
             <p className="text-slate-600 text-sm">
-              Organize by video codes, not URLs. Independent of any single source.
+              以番號為核心整理收藏，不依賴特定影片網站，永久保存你的清單。
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-            <h3 className="font-semibold text-lg mb-2">🔗 Smart Auto-Complete</h3>
+            <h3 className="font-semibold text-lg mb-2">🔗 智慧網址生成</h3>
             <p className="text-slate-600 text-sm">
-              Set your preferred sources and auto-generate full URLs from codes.
+              設定你喜歡的影片網站，一鍵從番號生成完整網址。
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-            <h3 className="font-semibold text-lg mb-2">🚀 Easy Sharing</h3>
+            <h3 className="font-semibold text-lg mb-2">🚀 輕鬆分享</h3>
             <p className="text-slate-600 text-sm">
-              Export as text or share public playlists with custom URLs.
+              匯出文字清單或生成公開分享連結，與朋友分享你的收藏。
             </p>
           </div>
         </div>

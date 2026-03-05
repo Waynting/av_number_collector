@@ -31,7 +31,7 @@ export function FloatingActionBar({
   }
 
   const handleCopy = () => {
-    const codes = selectedItems.map(item => item.normalizedCode).join('\n')
+    const codes = selectedItems.map(item => item.normalizedCode).join(' ')
     navigator.clipboard.writeText(codes)
     toast.success(`Copied ${selectedItems.length} codes to clipboard!`)
   }

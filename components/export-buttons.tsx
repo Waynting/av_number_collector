@@ -20,7 +20,7 @@ export function ExportButtons({
   isPublic,
 }: ExportButtonsProps) {
   const handleCopyAll = () => {
-    const codes = items.map(item => item.normalizedCode).join('\n')
+    const codes = items.map(item => item.normalizedCode).join(' ')
     navigator.clipboard.writeText(codes)
     toast.success(`Copied ${items.length} codes to clipboard!`)
   }

@@ -108,6 +108,18 @@ export async function addItemToPlaylist(playlistId: string, videoCode: string, n
 
   const normalizedCode = normalizeVideoCode(videoCode)
 
+  // Check for duplicates
+  const existingItem = await prisma.playlistItem.findFirst({
+    where: {
+      playlistId,
+      normalizedCode,
+    },
+  })
+
+  if (existingItem) {
+    throw new Error("This code is already in the playlist")
+  }
+
   // Get the highest position
   const lastItem = await prisma.playlistItem.findFirst({
     where: { playlistId },
@@ -147,6 +159,13 @@ export async function bulkAddItemsToPlaylist(playlistId: string, videoCodes: str
     throw new Error("Playlist not found")
   }
 
+  // Get existing normalized codes in this playlist
+  const existingItems = await prisma.playlistItem.findMany({
+    where: { playlistId },
+    select: { normalizedCode: true },
+  })
+  const existingCodes = new Set(existingItems.map(item => item.normalizedCode))
+
   // Get the highest position
   const lastItem = await prisma.playlistItem.findFirst({
     where: { playlistId },
@@ -166,6 +185,13 @@ export async function bulkAddItemsToPlaylist(playlistId: string, videoCodes: str
         position: position++,
       }
     })
+    // Filter out duplicates
+    .filter(item => !existingCodes.has(item.normalizedCode))
+
+  if (items.length === 0) {
+    revalidatePath(`/playlist/${playlistId}`)
+    return 0
+  }
 
   await prisma.playlistItem.createMany({
     data: items,

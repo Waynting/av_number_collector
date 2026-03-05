@@ -127,50 +127,56 @@ export function PlaylistHeader({ playlist }: { playlist: Playlist }) {
           </div>
 
           {/* Action buttons */}
-          <div className="flex flex-wrap sm:flex-nowrap gap-2 lg:ml-6">
+          <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto lg:ml-6">
             {playlist.isPublic && playlist.shareSlug && (
               <Button
                 variant="outline"
                 size="sm"
                 onClick={copyShareLink}
-                className="border-gray-300 hover:border-black flex-1 sm:flex-initial"
+                className="border-2 border-gray-300 hover:border-black w-full sm:w-auto"
               >
-                <Copy className="h-3.5 w-3.5 sm:h-4 sm:w-4 sm:mr-2" />
-                <span className="hidden sm:inline">Copy Link</span>
+                <Copy className="h-4 w-4 mr-2" />
+                <span>Copy Link</span>
               </Button>
             )}
             <Button
               variant="outline"
               size="sm"
               onClick={togglePublic}
-              className="border-gray-300 hover:border-black flex-1 sm:flex-initial"
+              className="border-2 border-gray-300 hover:border-black w-full sm:w-auto"
             >
-              <Share2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 sm:mr-2" />
-              <span className="hidden sm:inline">{playlist.isPublic ? "Make Private" : "Make Public"}</span>
+              <Share2 className="h-4 w-4 mr-2" />
+              <span>{playlist.isPublic ? "Make Private" : "Make Public"}</span>
             </Button>
             <Button
               variant="outline"
               size="sm"
               onClick={() => setEditOpen(true)}
-              className="border-gray-300 hover:border-black flex-1 sm:flex-initial"
+              className="border-2 border-gray-300 hover:border-black w-full sm:w-auto"
             >
-              <Edit className="h-3.5 w-3.5 sm:h-4 sm:w-4 sm:mr-2" />
-              <span className="hidden sm:inline">Edit</span>
+              <Edit className="h-4 w-4 mr-2" />
+              <span>Edit</span>
             </Button>
           </div>
         </div>
 
-        {/* Delete button - bottom right */}
-        <div className="flex justify-end mt-4 pt-4 border-t border-gray-200">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setDeleteOpen(true)}
-            className="border-gray-300 text-gray-900 hover:border-red-600 hover:text-red-600"
-          >
-            <Trash2 className="h-4 w-4 mr-2" />
-            Delete
-          </Button>
+        {/* Delete button - Danger Zone */}
+        <div className="mt-6 pt-6 border-t-2 border-gray-200">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div>
+              <h3 className="text-sm font-semibold text-red-600 mb-1">Danger Zone</h3>
+              <p className="text-xs text-gray-600">Permanently delete this playlist and all its contents</p>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setDeleteOpen(true)}
+              className="border-2 border-red-300 text-red-600 hover:bg-red-50 hover:border-red-600 w-full sm:w-auto"
+            >
+              <Trash2 className="h-4 w-4 mr-2" />
+              Delete Playlist
+            </Button>
+          </div>
         </div>
       </div>
 

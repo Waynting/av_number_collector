@@ -47,7 +47,7 @@ export default async function PlaylistPage({ params }: PageProps) {
   const allTemplates = mergeTemplates(userTemplates)
 
   return (
-    <div className="space-y-6 sm:space-y-8">
+    <div className="space-y-6 sm:space-y-8 pb-24 md:pb-8">
       <PlaylistHeader playlist={playlist} />
 
       <PlaylistPageClient

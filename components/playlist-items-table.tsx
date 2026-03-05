@@ -15,9 +15,10 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { deletePlaylistItem } from "@/app/actions/playlists"
 import { toast } from "sonner"
-import { Trash2, ListVideo, Search, ChevronDown, ChevronUp } from "lucide-react"
+import { Trash2, ListVideo, Search, ChevronDown, ChevronUp, Link as LinkIcon } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { EditNoteDialog } from "@/components/edit-note-dialog"
+import { LinkGeneratorPopover } from "@/components/link-generator-popover"
 
 interface PlaylistItem {
   id: string
@@ -235,6 +236,18 @@ export function PlaylistItemsTable({
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center gap-1">
+                          <LinkGeneratorPopover
+                            items={[item]}
+                            trigger={
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="hover:bg-gray-100 transition-smooth h-8 w-8 sm:h-9 sm:w-9 p-0"
+                              >
+                                <LinkIcon className="h-3 w-3 sm:h-4 sm:w-4" />
+                              </Button>
+                            }
+                          />
                           <EditNoteDialog
                             itemId={item.id}
                             videoCode={item.normalizedCode}

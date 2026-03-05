@@ -75,15 +75,16 @@ export function LinkGeneratorPopover({ items, userTemplates = [], trigger }: Lin
         {trigger || defaultTrigger}
       </PopoverTrigger>
       <PopoverContent
-        className="w-[480px] p-0 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+        className="w-[calc(100vw-2rem)] sm:w-[360px] p-0 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
         sideOffset={8}
+        align="end"
       >
         {/* Header */}
-        <div className="px-4 py-3 border-b-2 border-black bg-gray-50">
+        <div className="px-3 sm:px-3 py-2.5 sm:py-2 border-b-2 border-black bg-gray-50">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-sm font-bold text-black">Generate Links</h3>
-              <p className="text-xs text-gray-600 mt-0.5">
+              <h3 className="text-xs sm:text-sm font-bold text-black">Generate Links</h3>
+              <p className="text-[10px] sm:text-xs text-gray-600 mt-0.5">
                 Copy {items.length} {items.length === 1 ? 'code' : 'codes'} as URLs
               </p>
             </div>
@@ -91,7 +92,7 @@ export function LinkGeneratorPopover({ items, userTemplates = [], trigger }: Lin
         </div>
 
         {/* Source List */}
-        <div className="p-3 space-y-1.5 max-h-[400px] overflow-y-auto">
+        <div className="p-2 sm:p-2 space-y-1.5 max-h-[60vh] sm:max-h-[350px] overflow-y-auto">
           {allTemplates.map((template) => {
             const previewUrl = template.baseTemplate.replace('{code}', previewCode)
             const isCopied = copiedSource === template.id
@@ -103,35 +104,36 @@ export function LinkGeneratorPopover({ items, userTemplates = [], trigger }: Lin
                 onClick={() => handleCopyLinks(template)}
                 className="w-full group relative"
               >
-                <div className="flex items-start gap-3 p-3 bg-white border-2 border-gray-200 hover:border-black hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all rounded-lg text-left">
+                <div className="flex items-center gap-2 sm:gap-2 p-2.5 sm:p-2 bg-white border-2 border-gray-200 hover:border-black hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all rounded-lg text-left">
                   {/* Icon */}
-                  <div className="flex-shrink-0 w-8 h-8 bg-black text-white rounded flex items-center justify-center font-bold text-xs group-hover:scale-110 transition-transform">
+                  <div className="flex-shrink-0 w-7 h-7 sm:w-7 sm:h-7 bg-black text-white rounded flex items-center justify-center font-bold text-[10px] sm:text-[10px] group-hover:scale-110 transition-transform">
                     {template.name.substring(0, 2).toUpperCase()}
                   </div>
 
                   {/* Content */}
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="font-bold text-sm text-black">{template.name}</span>
+                    <div className="flex items-center gap-1.5 sm:gap-1.5 mb-0.5 sm:mb-0">
+                      <span className="font-bold text-xs sm:text-sm text-black">{template.name}</span>
                       {isBuiltIn && (
-                        <span className="text-[10px] px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded font-medium">
+                        <span className="text-[9px] sm:text-[9px] px-1 sm:px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded font-medium whitespace-nowrap">
                           Built-in
                         </span>
                       )}
                     </div>
-                    <p className="text-xs font-mono text-gray-600 truncate">
+                    {/* Show URL preview only on mobile */}
+                    <p className="text-[10px] sm:hidden font-mono text-gray-600 truncate break-all">
                       {previewUrl}
                     </p>
                   </div>
 
                   {/* Copy Icon */}
-                  <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center">
+                  <div className="flex-shrink-0 w-7 h-7 sm:w-7 sm:h-7 flex items-center justify-center">
                     {isCopied ? (
-                      <div className="w-5 h-5 bg-black text-white rounded-full flex items-center justify-center animate-in zoom-in duration-200">
-                        <Check className="h-3 w-3" strokeWidth={3} />
+                      <div className="w-4 h-4 sm:w-4 sm:h-4 bg-black text-white rounded-full flex items-center justify-center animate-in zoom-in duration-200">
+                        <Check className="h-2.5 w-2.5 sm:h-2.5 sm:w-2.5" strokeWidth={3} />
                       </div>
                     ) : (
-                      <Copy className="h-4 w-4 text-gray-400 group-hover:text-black transition-colors" />
+                      <Copy className="h-3.5 w-3.5 sm:h-3.5 sm:w-3.5 text-gray-400 group-hover:text-black transition-colors" />
                     )}
                   </div>
                 </div>
@@ -141,9 +143,9 @@ export function LinkGeneratorPopover({ items, userTemplates = [], trigger }: Lin
         </div>
 
         {/* Footer Tip */}
-        <div className="px-4 py-2.5 border-t-2 border-black bg-gray-50">
-          <p className="text-xs text-gray-600">
-            💡 Click any source to copy all {items.length} links to clipboard
+        <div className="px-3 sm:px-3 py-2 sm:py-1.5 border-t-2 border-black bg-gray-50">
+          <p className="text-[10px] sm:text-[10px] text-gray-600">
+            💡 Click any source to copy {items.length === 1 ? 'link' : `all ${items.length} links`}
           </p>
         </div>
       </PopoverContent>

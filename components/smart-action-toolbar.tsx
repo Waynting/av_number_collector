@@ -1,7 +1,8 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Plus, Trash2 } from "lucide-react"
+import { Plus, Trash2, Copy } from "lucide-react"
+import { toast } from "sonner"
 
 interface PlaylistItem {
   id: string
@@ -40,6 +41,13 @@ export function SmartActionToolbar({
 }: SmartActionToolbarProps) {
   const hasSelection = selectedItems.length > 0
   const itemCount = selectedItems.length
+
+  const handleCopyCodes = () => {
+    const itemsToUse = hasSelection ? selectedItems : allItems
+    const codes = itemsToUse.map(item => item.normalizedCode).join(' ')
+    navigator.clipboard.writeText(codes)
+    toast.success(`Copied ${itemsToUse.length} ${itemsToUse.length === 1 ? 'code' : 'codes'}!`)
+  }
 
   return (
     <div className="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm">
@@ -84,6 +92,20 @@ export function SmartActionToolbar({
             >
               <Plus className="h-4 w-4 mr-1.5" />
               <span className="hidden sm:inline">Add</span>
+            </Button>
+
+            {/* Copy Codes Button */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleCopyCodes}
+              className="shadow-sm border-2 border-gray-300 hover:border-black"
+            >
+              <Copy className="h-4 w-4 sm:mr-1.5" />
+              <span className="hidden sm:inline">Copy</span>
+              {hasSelection && (
+                <span className="ml-1 text-xs text-gray-500">({itemCount})</span>
+              )}
             </Button>
 
             {/* Delete (only show when items are selected) */}

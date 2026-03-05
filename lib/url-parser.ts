@@ -7,6 +7,7 @@ export interface ParseResult {
   source: 'url' | 'direct' | 'unknown'
   originalInput: string
   error?: string
+  isDuplicate?: boolean
 }
 
 /**
@@ -207,8 +208,9 @@ export function parseMultipleInputs(text: string): ParseResult[] {
  * Get statistics from parse results
  */
 export function getParseStats(results: ParseResult[]) {
-  const successful = results.filter(r => r.success).length
+  const successful = results.filter(r => r.success && !r.isDuplicate).length
   const failed = results.filter(r => !r.success).length
+  const duplicates = results.filter(r => r.success && r.isDuplicate).length
   const fromUrl = results.filter(r => r.success && r.source === 'url').length
   const fromDirect = results.filter(r => r.success && r.source === 'direct').length
 
@@ -216,6 +218,7 @@ export function getParseStats(results: ParseResult[]) {
     total: results.length,
     successful,
     failed,
+    duplicates,
     fromUrl,
     fromDirect
   }

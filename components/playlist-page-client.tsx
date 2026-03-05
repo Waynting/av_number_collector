@@ -6,7 +6,6 @@ import { toast } from "sonner"
 import { SmartActionToolbar } from "./smart-action-toolbar"
 import { PlaylistManager } from "./playlist-manager"
 import { UnifiedAddVideosDialog } from "./unified-add-videos-dialog"
-import { BottomActionBar } from "./bottom-action-bar"
 
 interface PlaylistItem {
   id: string
@@ -89,18 +88,12 @@ export function PlaylistPageClient({
         onSelectionChange={setSelectedItems}
       />
 
-      {/* Bottom Action Bar */}
-      <BottomActionBar
-        allItems={items}
-        selectedItems={selectedItems}
-        playlistName={playlistName}
-      />
-
       {/* Add Videos Dialog */}
       <UnifiedAddVideosDialog
         playlistId={playlistId}
         open={showAddDialog}
         onOpenChange={setShowAddDialog}
+        existingItems={items}
       />
     </>
   )
