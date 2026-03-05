@@ -42,12 +42,11 @@ export function FavoriteButton({ playlistId, initialIsFavorited }: FavoriteButto
       onClick={handleToggleFavorite}
       disabled={loading}
       className={isFavorited ? "bg-red-600 hover:bg-red-700 text-white" : "bg-black hover:bg-gray-800 text-white"}
-      size="lg"
+      size="sm"
     >
       <Heart
-        className={`h-5 w-5 mr-2 ${isFavorited ? "fill-current" : ""}`}
+        className={`h-4 w-4 ${isFavorited ? "fill-current" : ""}`}
       />
-      {loading ? "Updating..." : isFavorited ? "Remove from Favorites" : "Add to Favorites"}
     </Button>
   )
 }
