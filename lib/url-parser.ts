@@ -87,10 +87,12 @@ function parseFromUrl(urlString: string): ParseResult {
     // https://missav.com/SSIS-123
     // https://missav.com/cn/SSIS-123
     // https://missav.com/en/ssis-123
+    // https://missav.ws/dm45/ssis-212
     if (hostname.includes('missav')) {
-      const match = pathname.match(/\/(?:[a-z]{2}\/)?([\w-]+)/i)
-      if (match && match[1]) {
-        extractedCode = match[1]
+      // Always extract the last path segment (after the last /)
+      const pathSegments = pathname.split('/').filter(s => s.length > 0)
+      if (pathSegments.length > 0) {
+        extractedCode = pathSegments[pathSegments.length - 1]
       }
     }
 
