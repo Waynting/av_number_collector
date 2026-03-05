@@ -36,24 +36,24 @@ export default async function SourcesSettingsPage() {
 
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">Source Templates</h1>
-          <p className="text-slate-600 mt-1">
+          <h1 className="text-3xl font-bold text-black">Source Templates</h1>
+          <p className="text-gray-600 mt-1">
             Configure URL patterns to auto-generate links from video codes
           </p>
         </div>
         <CreateTemplateDialog />
       </div>
 
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-        <h3 className="font-semibold text-blue-900 mb-2">How it works</h3>
-        <p className="text-sm text-blue-800 mb-2">
-          Create templates with <code className="bg-blue-100 px-1 rounded">{'{code}'}</code> as a placeholder.
+      <div className="bg-gray-50 border border-gray-300 rounded-lg p-4 mb-6">
+        <h3 className="font-semibold text-black mb-2">How it works</h3>
+        <p className="text-sm text-gray-600 mb-2">
+          Create templates with <code className="bg-gray-100 px-1 rounded">{'{code}'}</code> as a placeholder.
           For example:
         </p>
-        <ul className="text-sm text-blue-800 space-y-1 list-disc list-inside">
-          <li><code className="bg-blue-100 px-1 rounded">https://missav.ws/{'{code}'}</code></li>
-          <li><code className="bg-blue-100 px-1 rounded">https://jable.tv/videos/{'{code}'}/</code></li>
-          <li><code className="bg-blue-100 px-1 rounded">https://example.com/search?q={'{code}'}</code></li>
+        <ul className="text-sm text-gray-600 space-y-1 list-disc list-inside">
+          <li><code className="bg-gray-100 px-1 rounded">https://missav.ws/{'{code}'}</code></li>
+          <li><code className="bg-gray-100 px-1 rounded">https://jable.tv/videos/{'{code}'}/</code></li>
+          <li><code className="bg-gray-100 px-1 rounded">https://example.com/search?q={'{code}'}</code></li>
         </ul>
       </div>
 

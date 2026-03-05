@@ -45,43 +45,43 @@ export function ExportButtons({
   }
 
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl shadow-soft overflow-hidden">
-      <div className="p-6 bg-gradient-to-br from-orange-50 to-amber-50 border-b border-slate-200">
+    <div className="bg-white border border-gray-200 rounded-lg shadow-soft overflow-hidden">
+      <div className="p-6 bg-gray-50 border-b border-gray-200">
         <div className="flex items-center gap-3 mb-2">
-          <div className="p-2 bg-orange-500 rounded-lg">
+          <div className="p-2 bg-black rounded-lg">
             <Download className="h-5 w-5 text-white" />
           </div>
-          <h3 className="text-lg font-bold text-slate-900">Export & Share</h3>
+          <h3 className="text-lg font-bold text-black">Export & Share</h3>
         </div>
-        <p className="text-sm text-slate-600">Download or share your playlist</p>
+        <p className="text-sm text-gray-600">Download or share your playlist</p>
       </div>
       <div className="p-6 space-y-3">
         <Button
           variant="outline"
-          className="w-full justify-start shadow-sm hover:shadow hover:bg-slate-50 transition-smooth"
+          className="w-full justify-start shadow-sm hover:shadow hover:bg-gray-50 transition-smooth"
           onClick={handleCopyAll}
         >
-          <Copy className="h-4 w-4 mr-3 text-slate-600" />
+          <Copy className="h-4 w-4 mr-3 text-gray-600" />
           <span className="flex-1 text-left">Copy All Codes</span>
-          <span className="text-xs text-slate-500">{items.length}</span>
+          <span className="text-xs text-gray-500">{items.length}</span>
         </Button>
         <Button
           variant="outline"
-          className="w-full justify-start shadow-sm hover:shadow hover:bg-slate-50 transition-smooth"
+          className="w-full justify-start shadow-sm hover:shadow hover:bg-gray-50 transition-smooth"
           onClick={handleDownload}
         >
-          <Download className="h-4 w-4 mr-3 text-slate-600" />
+          <Download className="h-4 w-4 mr-3 text-gray-600" />
           <span className="flex-1 text-left">Export as TXT</span>
         </Button>
         {isPublic && shareSlug && (
           <Button
             variant="outline"
-            className="w-full justify-start shadow-sm hover:shadow hover:bg-blue-50 hover:border-blue-300 transition-smooth group"
+            className="w-full justify-start shadow-sm hover:shadow hover:bg-gray-50 hover:border-gray-400 transition-smooth group"
             onClick={handleCopyShareLink}
           >
-            <LinkIcon className="h-4 w-4 mr-3 text-slate-600 group-hover:text-blue-600" />
+            <LinkIcon className="h-4 w-4 mr-3 text-gray-600 group-hover:text-black" />
             <span className="flex-1 text-left">Copy Share Link</span>
-            <span className="text-xs px-2 py-0.5 bg-blue-100 text-blue-700 rounded-md font-medium">Public</span>
+            <span className="text-xs px-2 py-0.5 bg-black text-white rounded-md font-medium">Public</span>
           </Button>
         )}
       </div>

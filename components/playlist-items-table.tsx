@@ -94,56 +94,47 @@ export function PlaylistItemsTable({
   }
 
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl shadow-soft overflow-hidden">
-      <div className="p-4 sm:p-6 border-b border-slate-200 bg-gradient-to-br from-white to-slate-50">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-4">
-          <div>
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900">Video Codes</h2>
-            <p className="text-xs sm:text-sm text-slate-600 mt-1">
-              {items.length} {items.length === 1 ? 'code' : 'codes'} in this playlist
-            </p>
-          </div>
-        </div>
-        {items.length > 0 && (
+    <div className="bg-white border border-gray-200 rounded-lg shadow-soft overflow-hidden">
+      {items.length > 0 && (
+        <div className="p-4 sm:p-6 border-b border-gray-200 bg-gray-50">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
               placeholder="Search by code or note..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 shadow-sm text-sm sm:text-base"
+              className="pl-10 shadow-sm text-sm sm:text-base border-gray-300"
             />
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       <div className="p-4 sm:p-6">
         {filteredItems.length === 0 ? (
           <div className="empty-state">
             {items.length === 0 ? (
               <>
-                <div className="relative mb-6">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 rounded-full blur-3xl opacity-30"></div>
-                  <ListVideo className="relative h-16 w-16 sm:h-20 sm:w-20 text-blue-500 mx-auto" strokeWidth={1.5} />
+                <div className="mb-6">
+                  <ListVideo className="h-16 w-16 sm:h-20 sm:w-20 text-black mx-auto" strokeWidth={1} />
                 </div>
-                <h3 className="text-lg sm:text-xl font-semibold text-slate-900 mb-2">
+                <h3 className="text-lg sm:text-xl font-semibold text-black mb-2">
                   Your playlist is empty
                 </h3>
-                <p className="text-sm sm:text-base text-slate-600 mb-6 max-w-md mx-auto leading-relaxed px-4">
+                <p className="text-sm sm:text-base text-gray-600 mb-6 max-w-md mx-auto leading-relaxed px-4">
                   Start building your collection by adding video codes. You can add them one by one or paste multiple codes at once.
                 </p>
                 <div className="flex flex-col gap-3 justify-center items-center px-4">
-                  <div className="text-xs sm:text-sm text-slate-500">
+                  <div className="text-xs sm:text-sm text-gray-500">
                     Try adding codes like:
                   </div>
                   <div className="flex flex-wrap gap-2 justify-center">
-                    <code className="px-2.5 sm:px-3 py-1.5 bg-blue-50 text-blue-700 rounded-lg text-xs sm:text-sm font-medium border border-blue-200">
+                    <code className="px-2.5 sm:px-3 py-1.5 bg-gray-100 text-black rounded-lg text-xs sm:text-sm font-medium border border-gray-300">
                       SSIS-123
                     </code>
-                    <code className="px-2.5 sm:px-3 py-1.5 bg-purple-50 text-purple-700 rounded-lg text-xs sm:text-sm font-medium border border-purple-200">
+                    <code className="px-2.5 sm:px-3 py-1.5 bg-gray-100 text-black rounded-lg text-xs sm:text-sm font-medium border border-gray-300">
                       IPX-920
                     </code>
-                    <code className="px-2.5 sm:px-3 py-1.5 bg-indigo-50 text-indigo-700 rounded-lg text-xs sm:text-sm font-medium border border-indigo-200">
+                    <code className="px-2.5 sm:px-3 py-1.5 bg-gray-100 text-black rounded-lg text-xs sm:text-sm font-medium border border-gray-300">
                       WAAA-412
                     </code>
                   </div>
@@ -151,21 +142,21 @@ export function PlaylistItemsTable({
               </>
             ) : (
               <>
-                <Search className="h-12 w-12 sm:h-16 sm:w-16 text-slate-300 mx-auto mb-4" />
-                <h3 className="text-base sm:text-lg font-semibold text-slate-900 mb-2">
+                <Search className="h-12 w-12 sm:h-16 sm:w-16 text-gray-300 mx-auto mb-4" />
+                <h3 className="text-base sm:text-lg font-semibold text-black mb-2">
                   No results found
                 </h3>
-                <p className="text-sm sm:text-base text-slate-600 px-4">
+                <p className="text-sm sm:text-base text-gray-600 px-4">
                   No codes match "{searchQuery}". Try adjusting your search.
                 </p>
               </>
             )}
           </div>
         ) : (
-          <div className="rounded-xl border border-slate-200 overflow-x-auto">
+          <div className="rounded-lg border border-gray-200 overflow-x-auto">
             <Table>
               <TableHeader>
-                <TableRow className="bg-slate-50/50 hover:bg-slate-50/50">
+                <TableRow className="bg-gray-50 hover:bg-gray-50">
                   <TableHead className="w-12 sm:w-14">
                     <Checkbox
                       checked={isAllSelected}
@@ -189,8 +180,8 @@ export function PlaylistItemsTable({
                       key={item.id}
                       className={`transition-smooth ${
                         isSelected
-                          ? 'bg-blue-50 hover:bg-blue-100'
-                          : 'hover:bg-slate-50/50'
+                          ? 'bg-gray-100 hover:bg-gray-200'
+                          : 'hover:bg-gray-50'
                       }`}
                     >
                       <TableCell>
@@ -201,17 +192,17 @@ export function PlaylistItemsTable({
                           className="mx-auto"
                         />
                       </TableCell>
-                      <TableCell className="text-slate-500 font-mono text-xs sm:text-sm">
+                      <TableCell className="text-gray-500 font-mono text-xs sm:text-sm">
                         {index + 1}
                       </TableCell>
-                      <TableCell className="font-mono text-slate-700 text-xs sm:text-sm hidden sm:table-cell">{item.videoCode}</TableCell>
+                      <TableCell className="font-mono text-black text-xs sm:text-sm hidden sm:table-cell">{item.videoCode}</TableCell>
                       <TableCell>
-                        <code className="px-2 sm:px-2.5 py-1 sm:py-1.5 bg-blue-50 border border-blue-200 text-blue-700 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap">
+                        <code className="px-2 sm:px-2.5 py-1 sm:py-1.5 bg-gray-100 border border-gray-300 text-black rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap">
                           {item.normalizedCode}
                         </code>
                       </TableCell>
-                      <TableCell className="text-xs sm:text-sm text-slate-600 hidden md:table-cell max-w-xs truncate">
-                        {item.note || <span className="text-slate-400">—</span>}
+                      <TableCell className="text-xs sm:text-sm text-gray-600 hidden md:table-cell max-w-xs truncate">
+                        {item.note || <span className="text-gray-400">—</span>}
                       </TableCell>
                       <TableCell>
                         <Button

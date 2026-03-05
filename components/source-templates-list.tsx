@@ -63,11 +63,11 @@ export function SourceTemplatesList({ templates }: { templates: SourceTemplate[]
     return (
       <Card className="border-dashed">
         <CardContent className="flex flex-col items-center justify-center py-16">
-          <LinkIcon className="h-12 w-12 text-slate-400 mb-4" />
-          <h3 className="text-lg font-semibold text-slate-900 mb-2">
+          <LinkIcon className="h-12 w-12 text-gray-400 mb-4" />
+          <h3 className="text-lg font-semibold text-black mb-2">
             No source templates yet
           </h3>
-          <p className="text-slate-600 text-center mb-6 max-w-md">
+          <p className="text-gray-600 text-center mb-6 max-w-md">
             Create your first source template to start generating URLs from video codes.
           </p>
         </CardContent>
@@ -118,9 +118,9 @@ export function SourceTemplatesList({ templates }: { templates: SourceTemplate[]
               </div>
             </CardHeader>
             <CardContent>
-              <div className="bg-slate-50 p-3 rounded text-sm">
-                <p className="text-slate-600 mb-1">Example output:</p>
-                <code className="text-slate-900">
+              <div className="bg-gray-50 p-3 rounded text-sm">
+                <p className="text-gray-600 mb-1">Example output:</p>
+                <code className="text-black">
                   {template.baseTemplate.replace('{code}', 'SSIS-123')}
                 </code>
               </div>

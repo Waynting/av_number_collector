@@ -113,16 +113,16 @@ export function CreateTemplateDialog() {
                 onChange={(e) => setTemplate(e.target.value)}
                 required
               />
-              <p className="text-xs text-slate-500">
-                Use <code className="bg-slate-100 px-1 rounded">{'{code}'}</code> as a placeholder
+              <p className="text-xs text-gray-500">
+                Use <code className="bg-gray-100 px-1 rounded">{'{code}'}</code> as a placeholder
                 for the video code
               </p>
             </div>
 
             {template && (
-              <div className="bg-slate-50 p-3 rounded">
-                <p className="text-xs text-slate-600 mb-1">Preview:</p>
-                <code className="text-sm text-slate-900">
+              <div className="bg-gray-50 p-3 rounded">
+                <p className="text-xs text-gray-600 mb-1">Preview:</p>
+                <code className="text-sm text-black">
                   {template.replace('{code}', 'SSIS-123')}
                 </code>
               </div>

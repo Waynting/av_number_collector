@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, Edit, Trash2, Share2, Download, Globe } from "lucide-react"
+import { ArrowLeft, Edit, Trash2, Share2, Download, Globe, Copy } from "lucide-react"
 import Link from "next/link"
 import { deletePlaylist, updatePlaylist } from "@/app/actions/playlists"
 import { toast } from "sonner"
@@ -78,6 +78,13 @@ export function PlaylistHeader({ playlist }: { playlist: Playlist }) {
     }
   }
 
+  const copyShareLink = () => {
+    if (!playlist.shareSlug) return
+    const shareUrl = `${window.location.origin}/share/${playlist.shareSlug}`
+    navigator.clipboard.writeText(shareUrl)
+    toast.success("Share link copied to clipboard!")
+  }
+
   return (
     <>
       {/* Breadcrumb */}
@@ -91,14 +98,14 @@ export function PlaylistHeader({ playlist }: { playlist: Playlist }) {
       </div>
 
       {/* Header Card */}
-      <div className="bg-gradient-to-br from-white to-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-6 lg:p-8 shadow-soft mb-6 sm:mb-8">
+      <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 lg:p-8 shadow-soft mb-6 sm:mb-8">
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 lg:gap-6">
           <div className="flex-1 min-w-0">
             {/* Title and badges */}
             <div className="flex items-center gap-2 sm:gap-3 flex-wrap mb-3">
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight break-words">{playlist.name}</h1>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black tracking-tight break-words">{playlist.name}</h1>
               {playlist.isPublic && (
-                <span className="inline-flex items-center gap-1.5 text-xs font-medium bg-blue-500 text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full shadow-sm flex-shrink-0">
+                <span className="inline-flex items-center gap-1.5 text-xs font-medium bg-black text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded flex-shrink-0">
                   <Globe className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                   Public
                 </span>
@@ -107,14 +114,13 @@ export function PlaylistHeader({ playlist }: { playlist: Playlist }) {
 
             {/* Description */}
             {playlist.description && (
-              <p className="text-slate-600 text-sm sm:text-base lg:text-lg mb-4 max-w-2xl leading-relaxed">{playlist.description}</p>
+              <p className="text-gray-600 text-sm sm:text-base lg:text-lg mb-4 max-w-2xl">{playlist.description}</p>
             )}
 
             {/* Metadata */}
-            <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm text-slate-500">
+            <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-600">
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></div>
-                <span className="font-medium text-slate-700">{playlist._count.items}</span>
+                <span className="font-bold text-black">{playlist._count.items}</span>
                 <span>{playlist._count.items === 1 ? 'video code' : 'video codes'}</span>
               </div>
             </div>
@@ -122,20 +128,31 @@ export function PlaylistHeader({ playlist }: { playlist: Playlist }) {
 
           {/* Action buttons */}
           <div className="flex flex-wrap sm:flex-nowrap gap-2 lg:ml-6">
+            {playlist.isPublic && playlist.shareSlug && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={copyShareLink}
+                className="border-gray-300 hover:border-black flex-1 sm:flex-initial"
+              >
+                <Copy className="h-3.5 w-3.5 sm:h-4 sm:w-4 sm:mr-2" />
+                <span className="hidden sm:inline">Copy Link</span>
+              </Button>
+            )}
             <Button
               variant="outline"
               size="sm"
               onClick={togglePublic}
-              className="shadow-sm hover:shadow transition-smooth flex-1 sm:flex-initial"
+              className="border-gray-300 hover:border-black flex-1 sm:flex-initial"
             >
               <Share2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 sm:mr-2" />
-              <span className="hidden sm:inline">{playlist.isPublic ? "Private" : "Public"}</span>
+              <span className="hidden sm:inline">{playlist.isPublic ? "Make Private" : "Make Public"}</span>
             </Button>
             <Button
               variant="outline"
               size="sm"
               onClick={() => setEditOpen(true)}
-              className="shadow-sm hover:shadow transition-smooth flex-1 sm:flex-initial"
+              className="border-gray-300 hover:border-black flex-1 sm:flex-initial"
             >
               <Edit className="h-3.5 w-3.5 sm:h-4 sm:w-4 sm:mr-2" />
               <span className="hidden sm:inline">Edit</span>
@@ -144,7 +161,7 @@ export function PlaylistHeader({ playlist }: { playlist: Playlist }) {
               variant="outline"
               size="sm"
               onClick={() => setDeleteOpen(true)}
-              className="shadow-sm hover:shadow transition-smooth text-red-600 hover:text-red-700 hover:border-red-300 flex-1 sm:flex-initial"
+              className="border-gray-300 text-gray-900 hover:border-red-600 hover:text-red-600 flex-1 sm:flex-initial"
             >
               <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 sm:mr-2" />
               <span className="hidden sm:inline">Delete</span>

@@ -1,3 +1,4 @@
+import { createClient } from "@/lib/supabase/server"
 import { prisma } from "@/lib/prisma"
 import { notFound } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -5,6 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Copy, ListVideo } from "lucide-react"
 import Link from "next/link"
 import { CopyCodesButton } from "@/components/copy-codes-button"
+import { FavoriteButton } from "@/components/favorite-button"
+import { checkIsFavorited } from "@/app/actions/favorites"
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -20,7 +23,10 @@ export default async function SharedPlaylistPage({ params }: PageProps) {
         orderBy: { position: 'asc' },
       },
       user: {
-        select: { email: true },
+        select: {
+          displayName: true,
+          email: true
+        },
       },
     },
   })
@@ -29,19 +35,52 @@ export default async function SharedPlaylistPage({ params }: PageProps) {
     notFound()
   }
 
+  // Check if user is authenticated
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  // Check if playlist is already favorited
+  let isFavorited = false
+  const isOwner = user?.id === playlist.userId
+  if (user && !isOwner) {
+    isFavorited = await checkIsFavorited(playlist.id)
+  }
+
+  const creatorName = playlist.user.displayName || playlist.user.email.split('@')[0]
+
   return (
-    <div className="min-h-screen bg-slate-50 py-12">
+    <div className="min-h-screen bg-white py-12">
       <div className="max-w-4xl mx-auto px-4">
         <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold text-slate-900 mb-2">
+          <h1 className="text-4xl font-bold text-black mb-2">
             {playlist.name}
           </h1>
           {playlist.description && (
-            <p className="text-lg text-slate-600">{playlist.description}</p>
+            <p className="text-lg text-gray-600">{playlist.description}</p>
           )}
-          <p className="text-sm text-slate-500 mt-4">
-            Shared playlist • {playlist.items.length} {playlist.items.length === 1 ? 'item' : 'items'}
+          <p className="text-sm text-gray-500 mt-4">
+            By {creatorName} • {playlist.items.length} {playlist.items.length === 1 ? 'item' : 'items'}
           </p>
+
+          {/* Favorite Button */}
+          {user && !isOwner && (
+            <div className="mt-6">
+              <FavoriteButton
+                playlistId={playlist.id}
+                initialIsFavorited={isFavorited}
+              />
+            </div>
+          )}
+
+          {!user && (
+            <div className="mt-6">
+              <Link href="/login">
+                <Button variant="outline">
+                  Sign in to save this playlist
+                </Button>
+              </Link>
+            </div>
+          )}
         </div>
 
         <Card>

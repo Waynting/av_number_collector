@@ -28,6 +28,7 @@ interface SourceTemplate {
   name: string
   baseTemplate: string
   isDefault: boolean
+  isBuiltIn?: boolean
 }
 
 interface GenerateLinksDialogProps {
@@ -68,14 +69,14 @@ export function GenerateLinksDialog({ items, templates, open: controlledOpen, on
 
   if (templates.length === 0) {
     return (
-      <div className="bg-slate-50 border-2 border-dashed border-slate-300 rounded-2xl p-6">
+      <div className="bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg p-6">
         <div className="flex items-center gap-3 mb-2 opacity-50">
-          <div className="p-2 bg-slate-300 rounded-lg">
-            <LinkIcon className="h-5 w-5 text-slate-600" />
+          <div className="p-2 bg-gray-300 rounded-lg">
+            <LinkIcon className="h-5 w-5 text-gray-600" />
           </div>
-          <h3 className="text-lg font-bold text-slate-700">Generate Links</h3>
+          <h3 className="text-lg font-bold text-black">Generate Links</h3>
         </div>
-        <p className="text-sm text-slate-600">
+        <p className="text-sm text-gray-600">
           Set up source templates in Settings first
         </p>
       </div>
@@ -86,14 +87,14 @@ export function GenerateLinksDialog({ items, templates, open: controlledOpen, on
     <Dialog open={open} onOpenChange={setOpen}>
       {controlledOpen === undefined && (
         <DialogTrigger asChild>
-          <div className="bg-gradient-to-br from-green-50 to-teal-50 border border-green-300 rounded-2xl p-6 cursor-pointer transition-smooth hover:shadow-elevated hover:border-green-400 group">
+          <div className="bg-white border border-gray-300 rounded-lg p-6 cursor-pointer transition-smooth hover:shadow-elevated hover:border-black group">
             <div className="flex items-center gap-3 mb-2">
-              <div className="p-2 bg-green-500 rounded-lg group-hover:scale-110 transition-smooth">
+              <div className="p-2 bg-black rounded-lg group-hover:scale-110 transition-smooth">
                 <LinkIcon className="h-5 w-5 text-white" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900">Generate Links</h3>
+              <h3 className="text-lg font-bold text-black">Generate Links</h3>
             </div>
-            <p className="text-sm text-slate-600">
+            <p className="text-sm text-gray-600">
               Convert codes to URLs using your templates
             </p>
           </div>
@@ -102,13 +103,13 @@ export function GenerateLinksDialog({ items, templates, open: controlledOpen, on
       <DialogContent className="max-w-3xl max-h-[80vh]">
         <DialogHeader>
           <DialogTitle className="text-xl">Generate Links from Template</DialogTitle>
-          <DialogDescription className="text-slate-600">
+          <DialogDescription className="text-gray-600">
             Select a source template to generate full URLs from your video codes
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-4 py-4">
           <div className="space-y-2">
-            <Label className="text-sm font-semibold text-slate-700">Source Template</Label>
+            <Label className="text-sm font-semibold text-black">Source Template</Label>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" className="w-full justify-between shadow-sm">
@@ -116,23 +117,32 @@ export function GenerateLinksDialog({ items, templates, open: controlledOpen, on
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-full">
-                <DropdownMenuLabel>Your Templates</DropdownMenuLabel>
+                <DropdownMenuLabel>Available Templates</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 {templates.map((template) => (
                   <DropdownMenuItem
                     key={template.id}
                     onClick={() => setSelectedTemplate(template)}
                   >
-                    {template.name}
-                    {template.isDefault && (
-                      <span className="ml-2 text-xs text-green-600 font-medium">(Default)</span>
-                    )}
+                    <span className="flex items-center gap-2">
+                      {template.name}
+                      {template.isBuiltIn && (
+                        <span className="text-xs bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded font-medium">
+                          Built-in
+                        </span>
+                      )}
+                      {template.isDefault && (
+                        <span className="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded font-medium">
+                          Default
+                        </span>
+                      )}
+                    </span>
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
             {selectedTemplate && (
-              <p className="text-xs text-slate-600 font-mono bg-slate-50 px-3 py-2 rounded-lg border border-slate-200">
+              <p className="text-xs text-gray-600 font-mono bg-gray-50 px-3 py-2 rounded-lg border border-gray-200">
                 {selectedTemplate.baseTemplate}
               </p>
             )}
@@ -146,7 +156,7 @@ export function GenerateLinksDialog({ items, templates, open: controlledOpen, on
           {generatedLinks.length > 0 && (
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <Label className="text-sm font-semibold text-slate-700">Generated Links</Label>
+                <Label className="text-sm font-semibold text-black">Generated Links</Label>
                 <Button variant="outline" size="sm" onClick={handleCopy} className="shadow-sm">
                   <Copy className="h-4 w-4 mr-2" />
                   Copy All
@@ -156,13 +166,13 @@ export function GenerateLinksDialog({ items, templates, open: controlledOpen, on
                 value={generatedLinks.join('\n')}
                 readOnly
                 rows={15}
-                className="font-mono text-xs shadow-sm border-slate-300"
+                className="font-mono text-xs shadow-sm border-gray-300"
               />
-              <div className="flex items-center gap-2 text-xs text-slate-600">
+              <div className="flex items-center gap-2 text-xs text-gray-600">
                 <div className="px-2.5 py-1 bg-green-100 border border-green-300 rounded-md font-medium text-green-700">
                   {generatedLinks.length} links
                 </div>
-                <span className="text-slate-500">generated successfully</span>
+                <span className="text-gray-500">generated successfully</span>
               </div>
             </div>
           )}

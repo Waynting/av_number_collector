@@ -34,16 +34,16 @@ export function Navbar() {
   ]
 
   return (
-    <nav className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+    <nav className="border-b border-gray-200 bg-black sticky top-0 z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 max-w-[1400px]">
-        <div className="flex justify-between h-16 sm:h-18">
-          <div className="flex items-center gap-4 sm:gap-8">
+        <div className="flex justify-between h-16">
+          <div className="flex items-center gap-6 sm:gap-8">
             <Link
               href="/dashboard"
-              className="text-lg sm:text-xl font-bold text-slate-900 hover:text-blue-600 transition-colors flex items-center gap-2"
+              className="text-base sm:text-lg font-bold text-white hover:text-gray-300 transition-colors flex items-center gap-2"
             >
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
-                <ListVideo className="h-4 w-4 text-white" />
+              <div className="w-7 h-7 bg-white rounded-md flex items-center justify-center">
+                <ListVideo className="h-4 w-4 text-black" />
               </div>
               <span className="hidden sm:inline">AV Playlist Manager</span>
             </Link>
@@ -56,10 +56,10 @@ export function Navbar() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                    className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       isActive
-                        ? "bg-blue-50 text-blue-700 shadow-sm"
-                        : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                        ? "bg-white text-black"
+                        : "text-gray-400 hover:text-white hover:bg-gray-900"
                     }`}
                   >
                     <Icon className="h-4 w-4" />
@@ -70,12 +70,12 @@ export function Navbar() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center">
             <Button
               variant="ghost"
               size="sm"
               onClick={handleSignOut}
-              className="text-slate-600 hover:text-red-600 hover:bg-red-50 transition-colors"
+              className="text-gray-400 hover:text-white hover:bg-gray-900"
             >
               <LogOut className="h-4 w-4 sm:mr-2" />
               <span className="hidden sm:inline">Sign Out</span>
