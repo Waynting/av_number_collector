@@ -10,32 +10,28 @@ import { sanitizeError } from "@/lib/validations"
  * Admin only
  */
 export async function getAllUsers() {
-  try {
-    await requireAdmin()
+  await requireAdmin()
 
-    const users = await prisma.user.findMany({
-      select: {
-        id: true,
-        email: true,
-        displayName: true,
-        avatarUrl: true,
-        isAdmin: true,
-        createdAt: true,
-        _count: {
-          select: {
-            playlists: true,
-            sourceTemplates: true,
-            favoritePlaylists: true,
-          },
+  const users = await prisma.user.findMany({
+    select: {
+      id: true,
+      email: true,
+      displayName: true,
+      avatarUrl: true,
+      isAdmin: true,
+      createdAt: true,
+      _count: {
+        select: {
+          playlists: true,
+          sourceTemplates: true,
+          favoritePlaylists: true,
         },
       },
-      orderBy: { createdAt: 'desc' },
-    })
+    },
+    orderBy: { createdAt: 'desc' },
+  })
 
-    return users
-  } catch (error) {
-    throw new Error(sanitizeError(error))
-  }
+  return users
 }
 
 /**
@@ -95,39 +91,35 @@ export async function deleteUser(userId: string) {
  * Admin only
  */
 export async function getAllPlaylists() {
-  try {
-    await requireAdmin()
+  await requireAdmin()
 
-    const playlists = await prisma.playlist.findMany({
-      include: {
-        user: {
-          select: {
-            id: true,
-            email: true,
-            displayName: true,
-            avatarUrl: true,
-          },
-        },
-        _count: {
-          select: { items: true },
-        },
-        items: {
-          take: 5, // Preview first 5 items
-          orderBy: { position: 'asc' },
-          select: {
-            id: true,
-            normalizedCode: true,
-            note: true,
-          },
+  const playlists = await prisma.playlist.findMany({
+    include: {
+      user: {
+        select: {
+          id: true,
+          email: true,
+          displayName: true,
+          avatarUrl: true,
         },
       },
-      orderBy: { updatedAt: 'desc' },
-    })
+      _count: {
+        select: { items: true },
+      },
+      items: {
+        take: 5, // Preview first 5 items
+        orderBy: { position: 'asc' },
+        select: {
+          id: true,
+          normalizedCode: true,
+          note: true,
+        },
+      },
+    },
+    orderBy: { updatedAt: 'desc' },
+  })
 
-    return playlists
-  } catch (error) {
-    throw new Error(sanitizeError(error))
-  }
+  return playlists
 }
 
 /**
@@ -135,42 +127,38 @@ export async function getAllPlaylists() {
  * Admin only
  */
 export async function getAllPublicPlaylists() {
-  try {
-    await requireAdmin()
+  await requireAdmin()
 
-    const playlists = await prisma.playlist.findMany({
-      where: {
-        isPublic: true,
-      },
-      include: {
-        user: {
-          select: {
-            id: true,
-            email: true,
-            displayName: true,
-            avatarUrl: true,
-          },
-        },
-        _count: {
-          select: { items: true },
-        },
-        items: {
-          take: 5, // Preview first 5 items
-          orderBy: { position: 'asc' },
-          select: {
-            id: true,
-            normalizedCode: true,
-            note: true,
-          },
+  const playlists = await prisma.playlist.findMany({
+    where: {
+      isPublic: true,
+    },
+    include: {
+      user: {
+        select: {
+          id: true,
+          email: true,
+          displayName: true,
+          avatarUrl: true,
         },
       },
-      orderBy: { updatedAt: 'desc' },
-    })
+      _count: {
+        select: { items: true },
+      },
+      items: {
+        take: 5, // Preview first 5 items
+        orderBy: { position: 'asc' },
+        select: {
+          id: true,
+          normalizedCode: true,
+          note: true,
+        },
+      },
+    },
+    orderBy: { updatedAt: 'desc' },
+  })
 
-    return playlists
-  } catch (error) {
-    throw new Error(sanitizeError(error))
-  }
+  return playlists
 }
 
 /**
@@ -228,41 +216,37 @@ export async function adminDeletePlaylist(playlistId: string) {
  * Admin only
  */
 export async function getAdminStats() {
-  try {
-    await requireAdmin()
+  await requireAdmin()
 
-    const [
-      totalUsers,
-      totalPlaylists,
-      publicPlaylists,
-      totalItems,
-      recentUsers,
-    ] = await Promise.all([
-      prisma.user.count(),
-      prisma.playlist.count(),
-      prisma.playlist.count({ where: { isPublic: true } }),
-      prisma.playlistItem.count(),
-      prisma.user.findMany({
-        take: 5,
-        orderBy: { createdAt: 'desc' },
-        select: {
-          email: true,
-          displayName: true,
-          createdAt: true,
-        },
-      }),
-    ])
+  const [
+    totalUsers,
+    totalPlaylists,
+    publicPlaylists,
+    totalItems,
+    recentUsers,
+  ] = await Promise.all([
+    prisma.user.count(),
+    prisma.playlist.count(),
+    prisma.playlist.count({ where: { isPublic: true } }),
+    prisma.playlistItem.count(),
+    prisma.user.findMany({
+      take: 5,
+      orderBy: { createdAt: 'desc' },
+      select: {
+        email: true,
+        displayName: true,
+        createdAt: true,
+      },
+    }),
+  ])
 
-    return {
-      totalUsers,
-      totalPlaylists,
-      publicPlaylists,
-      privatePlaylists: totalPlaylists - publicPlaylists,
-      totalItems,
-      recentUsers,
-    }
-  } catch (error) {
-    throw new Error(sanitizeError(error))
+  return {
+    totalUsers,
+    totalPlaylists,
+    publicPlaylists,
+    privatePlaylists: totalPlaylists - publicPlaylists,
+    totalItems,
+    recentUsers,
   }
 }
 
