@@ -1,7 +1,33 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { checkRateLimit, getClientIdentifier, RATE_LIMITS } from '@/lib/rate-limit'
+import '@/lib/env' // Validate environment variables at startup
 
 export async function updateSession(request: NextRequest) {
+  // Apply rate limiting to all routes
+  const clientId = getClientIdentifier(request.headers)
+  const rateLimitResult = checkRateLimit(clientId, RATE_LIMITS.api)
+
+  if (!rateLimitResult.success) {
+    return new NextResponse(
+      JSON.stringify({
+        error: 'Too many requests',
+        message: 'Rate limit exceeded. Please try again later.',
+        resetAt: new Date(rateLimitResult.resetAt).toISOString(),
+      }),
+      {
+        status: 429,
+        headers: {
+          'Content-Type': 'application/json',
+          'X-RateLimit-Limit': rateLimitResult.limit.toString(),
+          'X-RateLimit-Remaining': rateLimitResult.remaining.toString(),
+          'X-RateLimit-Reset': rateLimitResult.resetAt.toString(),
+          'Retry-After': Math.ceil((rateLimitResult.resetAt - Date.now()) / 1000).toString(),
+        },
+      }
+    )
+  }
+
   let supabaseResponse = NextResponse.next({
     request,
   })
@@ -47,6 +73,11 @@ export async function updateSession(request: NextRequest) {
     url.pathname = '/login'
     return NextResponse.redirect(url)
   }
+
+  // Add rate limit headers to response
+  supabaseResponse.headers.set('X-RateLimit-Limit', rateLimitResult.limit.toString())
+  supabaseResponse.headers.set('X-RateLimit-Remaining', rateLimitResult.remaining.toString())
+  supabaseResponse.headers.set('X-RateLimit-Reset', rateLimitResult.resetAt.toString())
 
   return supabaseResponse
 }

@@ -23,7 +23,6 @@ export default async function SharedPlaylistPage({ params }: PageProps) {
       user: {
         select: {
           displayName: true,
-          email: true
         },
       },
     },
@@ -44,7 +43,7 @@ export default async function SharedPlaylistPage({ params }: PageProps) {
     isFavorited = await checkIsFavorited(playlist.id)
   }
 
-  const creatorName = playlist.user.displayName || playlist.user.email.split('@')[0]
+  const creatorName = playlist.user.displayName || 'Anonymous User'
 
   return (
     <div className="min-h-screen bg-white">

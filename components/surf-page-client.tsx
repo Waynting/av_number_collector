@@ -23,7 +23,6 @@ interface Playlist {
   updatedAt: Date
   user: {
     displayName: string | null
-    email: string
     avatarUrl: string | null
   }
   _count: {
@@ -97,7 +96,7 @@ export function SurfPageClient({ initialPlaylists }: SurfPageClientProps) {
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6">
           {playlists.map((playlist) => {
-            const creatorName = playlist.user.displayName || playlist.user.email.split("@")[0]
+            const creatorName = playlist.user.displayName || "Anonymous User"
             return (
               <PlaylistCard
                 key={playlist.id}

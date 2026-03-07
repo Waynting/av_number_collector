@@ -180,10 +180,46 @@ npm run db:generate # Generate Prisma Client
 
 MIT
 
+## Contributing
+
+We welcome contributions from the community! Whether you're fixing bugs, adding features, or improving documentation, your help is appreciated.
+
+### Getting Started
+
+1. Read our [Contributing Guide](./docs/CONTRIBUTING.md)
+2. Check out the [Development Guide](./docs/DEVELOPMENT.md)
+3. Review the [Architecture Documentation](./docs/ARCHITECTURE.md)
+
+### Quick Links
+
+- 📖 [Documentation](./docs/)
+- 🐛 [Report a Bug](https://github.com/ORIGINAL_OWNER/av-web/issues/new)
+- 💡 [Request a Feature](https://github.com/ORIGINAL_OWNER/av-web/issues/new)
+- 💬 [Discussions](https://github.com/ORIGINAL_OWNER/av-web/discussions)
+
+## Documentation
+
+Comprehensive documentation is available in the [docs/](./docs/) folder:
+
+- **[Contributing Guide](./docs/CONTRIBUTING.md)** - How to contribute
+- **[Development Guide](./docs/DEVELOPMENT.md)** - Setup and workflows
+- **[Architecture](./docs/ARCHITECTURE.md)** - System design and patterns
+- **[Security](./SECURITY.md)** - Security measures and best practices
+
 ## Support
 
-For issues or questions, please create an issue on GitHub.
+For issues or questions:
+
+- 🐛 **Bug Reports**: [Create an issue](https://github.com/ORIGINAL_OWNER/av-web/issues/new)
+- 💬 **Questions**: [Start a discussion](https://github.com/ORIGINAL_OWNER/av-web/discussions)
+- 📧 **Security Issues**: See [SECURITY.md](./SECURITY.md)
+
+## License
+
+MIT
 
 ---
 
 Built with ❤️ using Next.js, Supabase, and Prisma
+
+**Open Source** • **Community Driven** • **MIT Licensed**

@@ -2,7 +2,7 @@ import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, Github, ExternalLink } from "lucide-react"
+import { ArrowLeft, Github, ExternalLink, Mail } from "lucide-react"
 import Link from "next/link"
 
 export default async function AboutPage() {
@@ -32,6 +32,38 @@ export default async function AboutPage() {
       </div>
 
       <div className="space-y-6">
+        {/* Contact & Support */}
+        <Card className="border-2 border-gray-800 bg-gray-50">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-gray-900">
+              <Mail className="h-5 w-5" />
+              聯絡與支援 / Contact & Support
+            </CardTitle>
+            <CardDescription className="text-gray-700">
+              遇到問題或有建議嗎？歡迎與我聯絡
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="bg-white rounded-lg p-4 border border-gray-300">
+              <p className="text-sm text-gray-600 mb-2">如有任何問題、建議或需要協助，請透過電子郵件聯絡：</p>
+              <p className="text-sm text-gray-600 mb-3">For any questions, suggestions, or assistance, please contact via email:</p>
+              <a
+                href="mailto:wayntingliu@gmail.com"
+                className="inline-flex items-center gap-2 text-gray-900 hover:text-gray-700 font-medium transition-colors"
+              >
+                <Mail className="h-4 w-4" />
+                wayntingliu@gmail.com
+                <ExternalLink className="h-3 w-3" />
+              </a>
+            </div>
+            <p className="text-xs text-gray-500">
+              💡 提示：請在郵件中清楚描述您的問題或建議，我會盡快回覆。
+              <br />
+              💡 Tip: Please describe your issue or suggestion clearly in the email, and I will respond as soon as possible.
+            </p>
+          </CardContent>
+        </Card>
+
         {/* GitHub Link */}
         <Card className="border-2 border-black">
           <CardHeader>

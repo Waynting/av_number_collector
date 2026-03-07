@@ -8,16 +8,34 @@ import {
   User,
   ListVideo,
   Compass,
-  Info
+  Info,
+  Shield
 } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
+import { useEffect, useState } from "react"
 
 export function Navbar() {
   const pathname = usePathname()
   const router = useRouter()
   const supabase = createClient()
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  useEffect(() => {
+    // Check if user is admin using server action
+    const checkAdmin = async () => {
+      try {
+        // Import the server action dynamically to avoid bundling issues
+        const { checkAdminStatus } = await import("@/app/actions/check-admin")
+        const adminStatus = await checkAdminStatus()
+        setIsAdmin(adminStatus)
+      } catch (error) {
+        setIsAdmin(false)
+      }
+    }
+    checkAdmin()
+  }, [])
 
   const handleSignOut = async () => {
     await supabase.auth.signOut()
@@ -73,7 +91,19 @@ export function Navbar() {
               </div>
             </div>
 
-            <div className="flex items-center">
+            <div className="flex items-center gap-2">
+              {isAdmin && (
+                <Link href="/admin">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-purple-400 hover:text-purple-300 hover:bg-gray-900 text-xs sm:text-sm gap-2"
+                  >
+                    <Shield className="h-4 w-4" />
+                    <span className="hidden sm:inline">Admin</span>
+                  </Button>
+                </Link>
+              )}
               <Button
                 variant="ghost"
                 size="sm"
