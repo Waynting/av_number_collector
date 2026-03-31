@@ -105,7 +105,7 @@ export function SharePageContent({
           placeholder="Search by code or note..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="pl-10 h-12 border-2 border-gray-300 focus:border-black text-base"
+          className="pl-10 h-12 text-base"
         />
         {searchQuery && (
           <div className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-500">
@@ -116,11 +116,11 @@ export function SharePageContent({
 
       {/* Action Bar - Add All Items */}
       {isAuthenticated && !isOwner && filteredItems.length > 0 && (
-        <div className="bg-black text-white border-2 border-black rounded-lg p-4 sm:p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+        <div className="bg-zinc-900 text-white rounded-xl p-4 sm:p-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <h3 className="text-lg font-bold mb-1">Want to save these codes?</h3>
-              <p className="text-sm text-gray-300">
+              <h3 className="text-base font-semibold mb-1">Want to save these codes?</h3>
+              <p className="text-sm text-zinc-400">
                 Add {searchQuery ? `${filteredItems.length} filtered` : `all ${items.length}`} {filteredItems.length === 1 ? "code" : "codes"} to your collection
               </p>
             </div>
@@ -139,12 +139,12 @@ export function SharePageContent({
       )}
 
       {!isAuthenticated && (
-        <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-4 sm:p-6 text-center">
-          <p className="text-gray-600 mb-4">
+        <div className="bg-zinc-50 border border-zinc-200/80 rounded-xl p-4 sm:p-6 text-center">
+          <p className="text-zinc-500 mb-4">
             Want to save these codes to your own collection?
           </p>
           <Link href="/login">
-            <Button className="bg-black hover:bg-gray-800 text-white">
+            <Button>
               Sign In to Save
             </Button>
           </Link>
@@ -173,26 +173,25 @@ export function SharePageContent({
         return (
           <div
           key={item.id}
-          className="border-2 border-black bg-white hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all rounded-lg overflow-hidden"
+          className="border border-zinc-200/80 bg-white hover:border-zinc-300 hover:shadow-sm transition-all duration-150 rounded-xl overflow-hidden"
         >
           {/* Video Code Header */}
-          <div className="bg-black text-white px-4 py-3 flex items-center justify-between">
+          <div className="px-4 py-3 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <span className="text-xs font-mono text-gray-400">#{index + 1}</span>
-              <h3 className="text-lg font-bold font-mono">{item.normalizedCode}</h3>
+              <span className="text-xs font-mono text-zinc-300">#{index + 1}</span>
+              <h3 className="text-base font-semibold font-mono text-zinc-900">{item.normalizedCode}</h3>
+              {item.note && (
+                <StickyNote className="h-3.5 w-3.5 text-zinc-300" />
+              )}
             </div>
             <div className="flex items-center gap-2">
-              {item.note && (
-                <StickyNote className="h-4 w-4 text-gray-400" />
-              )}
-              {/* Add to Playlist Button - Always show for authenticated users */}
               {isAuthenticated && !isOwner ? (
                 <AddItemsToPlaylistDialog
                   sourcePlaylistId={playlistId}
                   items={[item]}
                   trigger={
                     <button
-                      className="px-3 py-1.5 bg-white text-black hover:bg-gray-200 transition-all rounded text-xs font-semibold whitespace-nowrap"
+                      className="px-3 py-1.5 bg-zinc-900 text-white hover:bg-zinc-700 transition-all duration-150 rounded-lg text-xs font-medium whitespace-nowrap"
                       title="Add to my playlist"
                     >
                       加入清單
@@ -202,23 +201,22 @@ export function SharePageContent({
               ) : !isAuthenticated ? (
                 <Link href="/login">
                   <button
-                    className="px-3 py-1.5 bg-white text-black hover:bg-gray-200 transition-all rounded text-xs font-semibold whitespace-nowrap"
+                    className="px-3 py-1.5 bg-zinc-900 text-white hover:bg-zinc-700 transition-all duration-150 rounded-lg text-xs font-medium whitespace-nowrap"
                     title="Sign in to add to your playlist"
                   >
                     加入清單
                   </button>
                 </Link>
               ) : null}
-              {/* Copy Code Button */}
               <button
                 onClick={() => handleCopyCode(item.normalizedCode)}
-                className="w-8 h-8 flex items-center justify-center hover:bg-gray-800 transition-all rounded"
+                className="w-8 h-8 flex items-center justify-center hover:bg-zinc-100 transition-all duration-150 rounded-lg"
                 title="Copy code"
               >
                 {copiedCode === item.normalizedCode ? (
-                  <Check className="h-4 w-4 text-green-400" strokeWidth={3} />
+                  <Check className="h-4 w-4 text-green-600" strokeWidth={3} />
                 ) : (
-                  <Copy className="h-4 w-4" />
+                  <Copy className="h-4 w-4 text-zinc-400" />
                 )}
               </button>
             </div>
@@ -226,36 +224,33 @@ export function SharePageContent({
 
           {/* Author Note */}
           {item.note && (
-            <div className="px-4 py-3 bg-gray-50 border-b-2 border-gray-200">
+            <div className="px-4 py-2.5">
               <div className="flex items-start gap-2">
-                <StickyNote className="h-4 w-4 text-gray-600 mt-0.5 flex-shrink-0" />
-                <div className="flex-1">
-                  <p className="text-xs font-semibold text-gray-600 mb-1">Author's Note</p>
-                  <p className="text-sm text-black whitespace-pre-wrap">{item.note}</p>
-                </div>
+                <StickyNote className="h-3.5 w-3.5 text-zinc-300 mt-0.5 flex-shrink-0" />
+                <p className="text-sm text-zinc-600 whitespace-pre-wrap">{item.note}</p>
               </div>
             </div>
           )}
 
           {/* Source Links - Collapsible */}
-          <div className="border-t-2 border-gray-200">
+          <div>
             <button
               onClick={() => toggleExpanded(item.id)}
-              className="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-50 transition-colors"
+              className="w-full px-4 py-2.5 flex items-center justify-between hover:bg-zinc-50 transition-colors duration-150 border-t border-zinc-100"
             >
-              <div className="flex items-center gap-3">
-                <p className="text-xs font-semibold text-gray-600">AVAILABLE SOURCES</p>
-                <span className="text-xs text-gray-500">({DEFAULT_TEMPLATES.length})</span>
+              <div className="flex items-center gap-2">
+                <p className="text-xs font-medium text-zinc-400">Sources</p>
+                <span className="text-xs text-zinc-300">({DEFAULT_TEMPLATES.length})</span>
               </div>
               {isExpanded ? (
-                <ChevronUp className="h-5 w-5 text-gray-600" />
+                <ChevronUp className="h-4 w-4 text-zinc-300" />
               ) : (
-                <ChevronDown className="h-5 w-5 text-gray-600" />
+                <ChevronDown className="h-4 w-4 text-zinc-300" />
               )}
             </button>
 
             {isExpanded && (
-              <div className="px-4 pb-4 pt-2 space-y-2 bg-gray-50">
+              <div className="px-4 pb-4 pt-1 space-y-1.5">
                 {DEFAULT_TEMPLATES.map((template) => {
                   const url = template.baseTemplate.replace("{code}", item.normalizedCode)
                   const isCopied = copiedUrl === url
@@ -263,44 +258,41 @@ export function SharePageContent({
                   return (
                     <div
                       key={template.id}
-                      className="group flex items-center gap-3 p-3 bg-white hover:bg-gray-100 border border-gray-200 hover:border-black transition-all rounded"
+                      className="group flex items-center gap-3 p-2.5 hover:bg-zinc-50 transition-all duration-150 rounded-lg"
                     >
                       {/* Source Icon */}
-                      <div className="flex-shrink-0 w-8 h-8 bg-black text-white rounded flex items-center justify-center font-bold text-xs">
+                      <div className="flex-shrink-0 w-7 h-7 bg-zinc-100 text-zinc-600 rounded-lg flex items-center justify-center font-semibold text-xs">
                         {template.name.substring(0, 2).toUpperCase()}
                       </div>
 
                       {/* Source Info */}
                       <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-sm text-black mb-0.5">
+                        <p className="font-medium text-sm text-zinc-800">
                           {template.name}
                         </p>
-                        <p className="text-xs font-mono text-gray-600 truncate">{url}</p>
+                        <p className="text-xs font-mono text-zinc-400 truncate">{url}</p>
                       </div>
 
                       {/* Actions */}
-                      <div className="flex items-center gap-2 flex-shrink-0">
-                        {/* Open Link */}
+                      <div className="flex items-center gap-1 flex-shrink-0">
                         <a
                           href={url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-8 h-8 flex items-center justify-center hover:bg-black hover:text-white transition-all rounded"
+                          className="w-8 h-8 flex items-center justify-center hover:bg-zinc-100 transition-all duration-150 rounded-lg"
                           title="Open link"
                         >
-                          <ExternalLink className="h-4 w-4" />
+                          <ExternalLink className="h-4 w-4 text-zinc-400" />
                         </a>
-
-                        {/* Copy Button */}
                         <button
                           onClick={() => handleCopyUrl(url, template.name)}
-                          className="w-8 h-8 flex items-center justify-center hover:bg-black hover:text-white transition-all rounded"
+                          className="w-8 h-8 flex items-center justify-center hover:bg-zinc-100 transition-all duration-150 rounded-lg"
                           title="Copy link"
                         >
                           {isCopied ? (
                             <Check className="h-4 w-4 text-green-600" strokeWidth={3} />
                           ) : (
-                            <Copy className="h-4 w-4" />
+                            <Copy className="h-4 w-4 text-zinc-400" />
                           )}
                         </button>
                       </div>

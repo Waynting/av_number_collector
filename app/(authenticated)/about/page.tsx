@@ -33,7 +33,7 @@ export default async function AboutPage() {
 
       <div className="space-y-6">
         {/* Contact & Support */}
-        <Card className="border-2 border-gray-800 bg-gray-50">
+        <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-gray-900">
               <Mail className="h-5 w-5" />
@@ -44,7 +44,7 @@ export default async function AboutPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="bg-white rounded-lg p-4 border border-gray-300">
+            <div>
               <p className="text-sm text-gray-600 mb-2">如有任何問題、建議或需要協助，請透過電子郵件聯絡：</p>
               <p className="text-sm text-gray-600 mb-3">For any questions, suggestions, or assistance, please contact via email:</p>
               <a
@@ -65,7 +65,7 @@ export default async function AboutPage() {
         </Card>
 
         {/* GitHub Link */}
-        <Card className="border-2 border-black">
+        <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Github className="h-5 w-5" />
@@ -82,7 +82,7 @@ export default async function AboutPage() {
               rel="noopener noreferrer"
             >
               <Button
-                className="bg-black hover:bg-gray-800 text-white w-full sm:w-auto"
+                className="w-full sm:w-auto"
               >
                 <Github className="h-4 w-4 mr-2" />
                 View on GitHub
@@ -93,7 +93,7 @@ export default async function AboutPage() {
         </Card>
 
         {/* Why I Built This - Chinese */}
-        <Card className="border-2 border-black">
+        <Card>
           <CardHeader>
             <CardTitle>為什麼要做這個專案？</CardTitle>
             <CardDescription>建立這個工具的動機與理念</CardDescription>
@@ -129,7 +129,7 @@ export default async function AboutPage() {
         </Card>
 
         {/* Why I Built This - English */}
-        <Card className="border-2 border-black">
+        <Card>
           <CardHeader>
             <CardTitle>Why I Built This</CardTitle>
             <CardDescription>The motivation and philosophy behind this project</CardDescription>

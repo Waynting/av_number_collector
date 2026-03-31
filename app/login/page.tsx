@@ -60,7 +60,7 @@ export default function LoginPage() {
 
   if (magicLinkSent) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
+      <div className="min-h-screen flex items-center justify-center bg-white">
         <Card className="w-full max-w-md">
           <CardHeader className="text-center">
             <CardTitle>Check Your Email</CardTitle>
@@ -69,7 +69,7 @@ export default function LoginPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <p className="text-sm text-slate-600 text-center">
+            <p className="text-sm text-zinc-500 text-center">
               Click the link in the email to sign in. You can close this page.
             </p>
             <Button
@@ -86,13 +86,13 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className="min-h-screen flex items-center justify-center bg-white">
       <div className="w-full max-w-md space-y-8 px-4">
         <div className="text-center">
-          <Link href="/" className="text-3xl font-bold text-slate-900">
+          <Link href="/" className="text-3xl font-bold text-zinc-900">
             AV Number Collector
           </Link>
-          <p className="mt-2 text-slate-600">
+          <p className="mt-2 text-zinc-500">
             登入以管理你的番號收藏
           </p>
         </div>
@@ -141,7 +141,7 @@ export default function LoginPage() {
                   <span className="w-full border-t" />
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-white px-2 text-slate-500">Or</span>
+                  <span className="bg-white px-2 text-zinc-400">Or</span>
                 </div>
               </div>
 
@@ -165,7 +165,7 @@ export default function LoginPage() {
               </form>
             </div>
 
-            <div className="mt-6 text-center text-sm text-slate-600">
+            <div className="mt-6 text-center text-sm text-zinc-500">
               <Link href="/" className="hover:underline">
                 Back to home
               </Link>

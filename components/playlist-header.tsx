@@ -98,14 +98,14 @@ export function PlaylistHeader({ playlist }: { playlist: Playlist }) {
       </div>
 
       {/* Header Card */}
-      <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 lg:p-8 shadow-soft mb-6 sm:mb-8">
+      <div className="mb-6">
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 lg:gap-6">
           <div className="flex-1 min-w-0">
             {/* Title and badges */}
             <div className="flex items-center gap-2 sm:gap-3 flex-wrap mb-3">
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black tracking-tight break-words">{playlist.name}</h1>
+              <h1 className="text-2xl sm:text-3xl font-semibold text-zinc-900 tracking-tight break-words">{playlist.name}</h1>
               {playlist.isPublic && (
-                <span className="inline-flex items-center gap-1.5 text-xs font-medium bg-black text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded flex-shrink-0">
+                <span className="inline-flex items-center gap-1.5 text-xs font-medium bg-zinc-900 text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg flex-shrink-0">
                   <Globe className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                   Public
                 </span>
@@ -118,9 +118,9 @@ export function PlaylistHeader({ playlist }: { playlist: Playlist }) {
             )}
 
             {/* Metadata */}
-            <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-600">
+            <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm text-zinc-500">
               <div className="flex items-center gap-2">
-                <span className="font-bold text-black">{playlist._count.items}</span>
+                <span className="font-semibold text-zinc-900">{playlist._count.items}</span>
                 <span>{playlist._count.items === 1 ? 'video code' : 'video codes'}</span>
               </div>
             </div>
@@ -133,7 +133,7 @@ export function PlaylistHeader({ playlist }: { playlist: Playlist }) {
                 variant="outline"
                 size="sm"
                 onClick={copyShareLink}
-                className="border-2 border-gray-300 hover:border-black w-full sm:w-auto"
+                className="w-full sm:w-auto"
               >
                 <Copy className="h-4 w-4 mr-2" />
                 <span>Copy Link</span>
@@ -143,7 +143,7 @@ export function PlaylistHeader({ playlist }: { playlist: Playlist }) {
               variant="outline"
               size="sm"
               onClick={togglePublic}
-              className="border-2 border-gray-300 hover:border-black w-full sm:w-auto"
+              className="w-full sm:w-auto"
             >
               <Share2 className="h-4 w-4 mr-2" />
               <span>{playlist.isPublic ? "Make Private" : "Make Public"}</span>
@@ -152,7 +152,7 @@ export function PlaylistHeader({ playlist }: { playlist: Playlist }) {
               variant="outline"
               size="sm"
               onClick={() => setEditOpen(true)}
-              className="border-2 border-gray-300 hover:border-black w-full sm:w-auto"
+              className="w-full sm:w-auto"
             >
               <Edit className="h-4 w-4 mr-2" />
               <span>Edit</span>
@@ -160,23 +160,17 @@ export function PlaylistHeader({ playlist }: { playlist: Playlist }) {
           </div>
         </div>
 
-        {/* Delete button - Danger Zone */}
-        <div className="mt-6 pt-6 border-t-2 border-gray-200">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <div>
-              <h3 className="text-sm font-semibold text-red-600 mb-1">Danger Zone</h3>
-              <p className="text-xs text-gray-600">Permanently delete this playlist and all its contents</p>
-            </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setDeleteOpen(true)}
-              className="border-2 border-red-300 text-red-600 hover:bg-red-50 hover:border-red-600 w-full sm:w-auto"
-            >
-              <Trash2 className="h-4 w-4 mr-2" />
-              Delete Playlist
-            </Button>
-          </div>
+        {/* Delete button */}
+        <div className="mt-4 pt-4 border-t border-zinc-100">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setDeleteOpen(true)}
+            className="text-red-600 hover:bg-red-50 hover:text-red-700"
+          >
+            <Trash2 className="h-4 w-4 mr-2" />
+            Delete Playlist
+          </Button>
         </div>
       </div>
 

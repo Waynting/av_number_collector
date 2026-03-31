@@ -57,21 +57,21 @@ export function SurfPageClient({ initialPlaylists }: SurfPageClientProps) {
   return (
     <div className="space-y-6">
       {/* Search Bar */}
-      <div className="bg-white border-2 border-black rounded-lg shadow-soft p-4 sm:p-6">
+      <div className="bg-white border border-zinc-200/80 rounded-xl p-4 sm:p-5">
         <form onSubmit={handleSearch} className="flex gap-3">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400" />
             <Input
               placeholder="Search playlists by name, description, or creator..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 border-2 border-gray-300 focus:border-black"
+              className="pl-10"
             />
           </div>
           <Button
             type="submit"
             disabled={isPending}
-            className="bg-black hover:bg-gray-800 text-white px-6"
+            className="px-6"
           >
             {isPending ? "Searching..." : "Search"}
           </Button>
@@ -80,13 +80,13 @@ export function SurfPageClient({ initialPlaylists }: SurfPageClientProps) {
 
       {/* Results */}
       {playlists.length === 0 ? (
-        <div className="bg-white border-2 border-black rounded-lg shadow-soft">
-          <div className="flex flex-col items-center justify-center py-16 sm:py-20 px-6">
-            <Search className="h-16 w-16 sm:h-20 sm:w-20 text-gray-300 mb-6" strokeWidth={1} />
-            <h3 className="text-xl sm:text-2xl font-bold text-black mb-3">
+        <div className="bg-white border border-zinc-200/80 rounded-xl">
+          <div className="flex flex-col items-center justify-center py-12 px-6">
+            <Search className="h-10 w-10 sm:h-12 sm:w-12 text-zinc-300 mb-4" strokeWidth={1.5} />
+            <h3 className="text-lg sm:text-xl font-semibold text-zinc-800 mb-2">
               No playlists found
             </h3>
-            <p className="text-gray-600 text-center max-w-md text-base sm:text-lg">
+            <p className="text-zinc-500 text-center max-w-md text-sm sm:text-base">
               {searchQuery
                 ? `No public playlists match "${searchQuery}". Try a different search term.`
                 : "No public playlists available yet. Be the first to share one!"}
@@ -130,11 +130,11 @@ function PlaylistCard({
   }, [playlist.id])
 
   return (
-    <div className="bg-white border-2 border-black rounded-lg shadow-soft hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all overflow-hidden">
+    <div className="bg-white border border-zinc-200/80 rounded-xl hover:border-zinc-300 hover:shadow-sm transition-all duration-150 overflow-hidden">
       {/* Header */}
-      <div className="p-6 border-b-2 border-black">
+      <div className="p-6">
         <div className="flex items-start justify-between gap-4 mb-3">
-          <h3 className="text-xl font-bold text-black line-clamp-2">
+          <h3 className="text-lg font-semibold text-zinc-900 line-clamp-2">
             {playlist.name}
           </h3>
           {!isCheckingFavorite && (
@@ -146,29 +146,29 @@ function PlaylistCard({
         </div>
 
         {playlist.description && (
-          <p className="text-sm text-gray-600 line-clamp-2 mb-4">
+          <p className="text-sm text-zinc-500 line-clamp-2 mb-4">
             {playlist.description}
           </p>
         )}
 
         {/* Creator Info */}
-        <div className="flex items-center gap-2 text-sm text-gray-600">
+        <div className="flex items-center gap-2 text-sm text-zinc-500">
           <User className="h-4 w-4" />
           <span>
-            By <span className="font-semibold text-black">{creatorName}</span>
+            By <span className="font-medium text-zinc-700">{creatorName}</span>
           </span>
         </div>
       </div>
 
       {/* Preview Codes */}
       {playlist.items.length > 0 && (
-        <div className="px-6 py-4 bg-gray-50 border-b-2 border-black">
-          <p className="text-xs font-semibold text-gray-600 mb-2">PREVIEW</p>
-          <div className="flex flex-wrap gap-2">
+        <div className="px-6 py-3 border-t border-zinc-100">
+          <p className="text-xs font-medium text-zinc-400 mb-2">PREVIEW</p>
+          <div className="flex flex-wrap gap-1.5">
             {playlist.items.map((item, index) => (
               <code
                 key={index}
-                className="px-2.5 py-1 bg-white border border-gray-300 text-black rounded text-xs font-semibold"
+                className="px-2 py-0.5 bg-zinc-100 text-zinc-700 rounded-md text-xs font-medium"
               >
                 {item.normalizedCode}
               </code>
@@ -186,13 +186,13 @@ function PlaylistCard({
       <div className="p-6">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-4 text-sm">
-            <div className="flex items-center text-black">
-              <span className="font-bold">{playlist._count.items}</span>
-              <span className="text-gray-500 ml-1">
+            <div className="flex items-center text-zinc-900">
+              <span className="font-semibold">{playlist._count.items}</span>
+              <span className="text-zinc-400 ml-1">
                 {playlist._count.items === 1 ? "code" : "codes"}
               </span>
             </div>
-            <div className="text-xs text-gray-500">
+            <div className="text-xs text-zinc-400">
               Updated {new Date(playlist.updatedAt).toLocaleDateString()}
             </div>
           </div>
@@ -206,7 +206,7 @@ function PlaylistCard({
           >
             <Button
               variant="outline"
-              className="w-full border-2 border-black hover:bg-black hover:text-white"
+              className="w-full"
             >
               <ExternalLink className="h-4 w-4 mr-2" />
               View

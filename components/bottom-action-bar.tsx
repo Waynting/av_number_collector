@@ -28,7 +28,7 @@ export function BottomActionBar({
   }
 
   return (
-    <div className="sticky bottom-0 z-40 bg-white border-t-2 border-black mb-16 md:mb-0">
+    <div className="sticky bottom-0 z-40 bg-white/95 backdrop-blur-sm border-t border-zinc-200/80 mb-16 md:mb-0">
       <div className="px-4 sm:px-6 py-3.5">
         <div className="flex items-center justify-center">
           {/* Generate Links - Popover */}

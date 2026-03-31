@@ -69,11 +69,11 @@ export function LinkGeneratorPopover({ items, userTemplates = [], trigger }: Lin
     <Button
       variant="outline"
       size="sm"
-      className="shadow-sm hover:bg-gray-50 transition-all"
+      className="hover:bg-zinc-50 transition-all duration-150"
     >
       <LinkIcon className="h-4 w-4 mr-2" />
       Generate Links
-      <span className="ml-2 text-xs text-gray-500">({items.length})</span>
+      <span className="ml-2 text-xs text-zinc-400">({items.length})</span>
     </Button>
   )
 
@@ -83,16 +83,16 @@ export function LinkGeneratorPopover({ items, userTemplates = [], trigger }: Lin
         {trigger || defaultTrigger}
       </PopoverTrigger>
       <PopoverContent
-        className="w-[calc(100vw-2rem)] sm:w-[360px] p-0 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+        className="w-[calc(100vw-2rem)] sm:w-[360px] p-0 bg-white border border-zinc-200/80 shadow-lg rounded-xl"
         sideOffset={8}
         align="end"
       >
         {/* Header */}
-        <div className="px-3 sm:px-3 py-2.5 sm:py-2 border-b-2 border-black bg-gray-50">
+        <div className="px-3 sm:px-3 py-2.5 sm:py-2 border-b border-zinc-100">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-xs sm:text-sm font-bold text-black">Generate Links</h3>
-              <p className="text-[10px] sm:text-xs text-gray-600 mt-0.5">
+              <h3 className="text-xs sm:text-sm font-semibold text-zinc-800">Generate Links</h3>
+              <p className="text-[10px] sm:text-xs text-zinc-400 mt-0.5">
                 Copy {items.length} {items.length === 1 ? 'code' : 'codes'} as URLs
               </p>
             </div>
@@ -112,24 +112,24 @@ export function LinkGeneratorPopover({ items, userTemplates = [], trigger }: Lin
                 onClick={() => handleCopyLinks(template)}
                 className="w-full group relative"
               >
-                <div className="flex items-center gap-2 sm:gap-2 p-2.5 sm:p-2 bg-white border-2 border-gray-200 hover:border-black hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all rounded-lg text-left">
+                <div className="flex items-center gap-2 sm:gap-2 p-2.5 sm:p-2 bg-white hover:bg-zinc-50 transition-all duration-150 rounded-lg text-left">
                   {/* Icon */}
-                  <div className="flex-shrink-0 w-7 h-7 sm:w-7 sm:h-7 bg-black text-white rounded flex items-center justify-center font-bold text-[10px] sm:text-[10px] group-hover:scale-110 transition-transform">
+                  <div className="flex-shrink-0 w-7 h-7 sm:w-7 sm:h-7 bg-zinc-100 text-zinc-600 rounded-lg flex items-center justify-center font-semibold text-[10px] sm:text-[10px] group-hover:scale-105 transition-transform">
                     {template.name.substring(0, 2).toUpperCase()}
                   </div>
 
                   {/* Content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-1.5 sm:gap-1.5 mb-0.5 sm:mb-0">
-                      <span className="font-bold text-xs sm:text-sm text-black">{template.name}</span>
+                      <span className="font-medium text-xs sm:text-sm text-zinc-800">{template.name}</span>
                       {isBuiltIn && (
-                        <span className="text-[9px] sm:text-[9px] px-1 sm:px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded font-medium whitespace-nowrap">
+                        <span className="text-[9px] sm:text-[9px] px-1 sm:px-1.5 py-0.5 bg-zinc-100 text-zinc-500 rounded-md font-medium whitespace-nowrap">
                           Built-in
                         </span>
                       )}
                     </div>
                     {/* Show URL preview only on mobile */}
-                    <p className="text-[10px] sm:hidden font-mono text-gray-600 truncate break-all">
+                    <p className="text-[10px] sm:hidden font-mono text-zinc-400 truncate break-all">
                       {previewUrl}
                     </p>
                   </div>
@@ -137,11 +137,11 @@ export function LinkGeneratorPopover({ items, userTemplates = [], trigger }: Lin
                   {/* Copy Icon */}
                   <div className="flex-shrink-0 w-7 h-7 sm:w-7 sm:h-7 flex items-center justify-center">
                     {isCopied ? (
-                      <div className="w-4 h-4 sm:w-4 sm:h-4 bg-black text-white rounded-full flex items-center justify-center animate-in zoom-in duration-200">
+                      <div className="w-4 h-4 sm:w-4 sm:h-4 bg-zinc-900 text-white rounded-full flex items-center justify-center animate-in zoom-in duration-200">
                         <Check className="h-2.5 w-2.5 sm:h-2.5 sm:w-2.5" strokeWidth={3} />
                       </div>
                     ) : (
-                      <Copy className="h-3.5 w-3.5 sm:h-3.5 sm:w-3.5 text-gray-400 group-hover:text-black transition-colors" />
+                      <Copy className="h-3.5 w-3.5 sm:h-3.5 sm:w-3.5 text-zinc-400 group-hover:text-zinc-700 transition-colors" />
                     )}
                   </div>
                 </div>
@@ -151,8 +151,8 @@ export function LinkGeneratorPopover({ items, userTemplates = [], trigger }: Lin
         </div>
 
         {/* Footer Tip */}
-        <div className="px-3 sm:px-3 py-2 sm:py-1.5 border-t-2 border-black bg-gray-50">
-          <p className="text-[10px] sm:text-[10px] text-gray-600">
+        <div className="px-3 sm:px-3 py-2 sm:py-1.5 border-t border-zinc-100">
+          <p className="text-[10px] sm:text-[10px] text-zinc-400">
             💡 Click any source to copy {items.length === 1 ? 'link' : `all ${items.length} links`}
           </p>
         </div>

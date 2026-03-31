@@ -96,7 +96,7 @@ export function SmartActionToolbar({
             <Button
               size="sm"
               onClick={onOpenAddDialog}
-              className="bg-black hover:bg-gray-800 text-white shadow-sm"
+              className=""
             >
               <Plus className="h-4 w-4 mr-1.5" />
               <span className="hidden sm:inline">Add</span>
@@ -107,7 +107,7 @@ export function SmartActionToolbar({
               variant="outline"
               size="sm"
               onClick={handleCopyCodes}
-              className="shadow-sm border-2 border-gray-300 hover:border-black"
+              className="shadow-sm"
             >
               <Copy className="h-4 w-4 sm:mr-1.5" />
               <span className="hidden sm:inline">Copy</span>

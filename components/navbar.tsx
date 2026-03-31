@@ -54,16 +54,16 @@ export function Navbar() {
   return (
     <>
       {/* Top Navigation Bar */}
-      <nav className="border-b border-gray-200 bg-black sticky top-0 z-50">
+      <nav className="border-b border-zinc-200/80 bg-zinc-900 sticky top-0 z-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 max-w-[1400px]">
           <div className="flex justify-between h-16">
             <div className="flex items-center gap-6 sm:gap-8">
               <Link
                 href="/dashboard"
-                className="text-base sm:text-lg font-bold text-white hover:text-gray-300 transition-colors flex items-center gap-2"
+                className="text-base sm:text-lg font-semibold text-white hover:text-zinc-300 transition-colors flex items-center gap-2"
               >
-                <div className="w-7 h-7 bg-white rounded-md flex items-center justify-center">
-                  <ListVideo className="h-4 w-4 text-black" />
+                <div className="w-7 h-7 bg-white/90 rounded-lg flex items-center justify-center">
+                  <ListVideo className="h-4 w-4 text-zinc-900" />
                 </div>
                 <span className="hidden sm:inline">AV Number Collector</span>
               </Link>
@@ -77,10 +77,10 @@ export function Navbar() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                      className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150 ${
                         isActive
-                          ? "bg-white text-black"
-                          : "text-gray-400 hover:text-white hover:bg-gray-900"
+                          ? "bg-white/95 text-zinc-900"
+                          : "text-zinc-400 hover:text-white hover:bg-white/10"
                       }`}
                     >
                       <Icon className="h-4 w-4" />
@@ -97,7 +97,7 @@ export function Navbar() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="text-purple-400 hover:text-purple-300 hover:bg-gray-900 text-xs sm:text-sm gap-2"
+                    className="text-purple-400 hover:text-purple-300 hover:bg-white/10 text-xs sm:text-sm gap-2"
                   >
                     <Shield className="h-4 w-4" />
                     <span className="hidden sm:inline">Admin</span>
@@ -108,7 +108,7 @@ export function Navbar() {
                 variant="ghost"
                 size="sm"
                 onClick={handleSignOut}
-                className="text-gray-400 hover:text-white hover:bg-gray-900 text-xs sm:text-sm"
+                className="text-zinc-400 hover:text-white hover:bg-white/10 text-xs sm:text-sm"
               >
                 Sign Out
               </Button>
@@ -118,7 +118,7 @@ export function Navbar() {
       </nav>
 
       {/* Mobile Bottom Tab Bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-black border-t-2 border-gray-800 z-50 safe-area-inset-bottom">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-zinc-900 border-t border-zinc-800/50 z-50 safe-area-inset-bottom">
         <div className="flex items-center justify-around h-16">
           {navItems.map((item) => {
             const Icon = item.icon
@@ -127,13 +127,13 @@ export function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex flex-col items-center justify-center gap-1 px-3 py-2 flex-1 transition-colors ${
+                className={`flex flex-col items-center justify-center gap-1 px-3 py-2 flex-1 transition-all duration-150 ${
                   isActive
                     ? "text-white"
-                    : "text-gray-400"
+                    : "text-zinc-500"
                 }`}
               >
-                <Icon className={`h-5 w-5 ${isActive ? "text-white" : "text-gray-400"}`} />
+                <Icon className={`h-5 w-5 ${isActive ? "text-white" : "text-zinc-500"}`} />
                 <span className="text-[10px] font-medium">{item.label.split(' ')[0]}</span>
               </Link>
             )

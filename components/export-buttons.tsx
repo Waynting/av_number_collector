@@ -45,8 +45,8 @@ export function ExportButtons({
   }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg shadow-soft overflow-hidden">
-      <div className="p-6 bg-gray-50 border-b border-gray-200">
+    <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+      <div className="p-6 border-b border-gray-200">
         <div className="flex items-center gap-3 mb-2">
           <div className="p-2 bg-black rounded-lg">
             <Download className="h-5 w-5 text-white" />

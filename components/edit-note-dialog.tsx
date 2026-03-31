@@ -90,7 +90,7 @@ export function EditNoteDialog({ itemId, videoCode, currentNote }: EditNoteDialo
             <Button
               type="submit"
               disabled={loading}
-              className="bg-black hover:bg-gray-800 text-white"
+              className=""
             >
               {loading ? "Saving..." : "Save Note"}
             </Button>

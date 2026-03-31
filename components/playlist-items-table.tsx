@@ -97,19 +97,19 @@ export function PlaylistItemsTable({
   }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg shadow-soft overflow-hidden">
+    <div className="bg-white border border-zinc-200/80 rounded-xl overflow-hidden">
       {/* Header with collapse toggle */}
-      <div className="p-4 sm:p-6 border-b border-gray-200 bg-gray-50">
+      <div className="p-4 sm:p-6 border-b border-zinc-100">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <h3 className="text-lg font-semibold text-black">Video Codes</h3>
-            <span className="text-sm text-gray-600">({items.length})</span>
+            <h3 className="text-base font-semibold text-zinc-800">Video Codes</h3>
+            <span className="text-sm text-zinc-400">({items.length})</span>
           </div>
           <Button
             variant="ghost"
             size="sm"
             onClick={() => setIsTableExpanded(!isTableExpanded)}
-            className="hover:bg-gray-200"
+            className="hover:bg-zinc-100"
           >
             {isTableExpanded ? (
               <>
@@ -132,7 +132,7 @@ export function PlaylistItemsTable({
               placeholder="Search by code or note..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 shadow-sm text-sm sm:text-base border-gray-300"
+              className="pl-10 text-sm sm:text-base"
             />
           </div>
         )}
@@ -145,9 +145,9 @@ export function PlaylistItemsTable({
             {items.length === 0 ? (
               <>
                 <div className="mb-6">
-                  <ListVideo className="h-16 w-16 sm:h-20 sm:w-20 text-black mx-auto" strokeWidth={1} />
+                  <ListVideo className="h-10 w-10 sm:h-12 sm:w-12 text-zinc-300 mx-auto" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-lg sm:text-xl font-semibold text-black mb-2">
+                <h3 className="text-lg sm:text-xl font-semibold text-zinc-800 mb-2">
                   Your playlist is empty
                 </h3>
                 <p className="text-sm sm:text-base text-gray-600 mb-6 max-w-md mx-auto leading-relaxed px-4">
@@ -158,13 +158,13 @@ export function PlaylistItemsTable({
                     Try adding codes like:
                   </div>
                   <div className="flex flex-wrap gap-2 justify-center">
-                    <code className="px-2.5 sm:px-3 py-1.5 bg-gray-100 text-black rounded-lg text-xs sm:text-sm font-medium border border-gray-300">
+                    <code className="px-2.5 sm:px-3 py-1.5 bg-zinc-100 text-zinc-800 rounded-lg text-xs sm:text-sm font-medium">
                       SSIS-123
                     </code>
-                    <code className="px-2.5 sm:px-3 py-1.5 bg-gray-100 text-black rounded-lg text-xs sm:text-sm font-medium border border-gray-300">
+                    <code className="px-2.5 sm:px-3 py-1.5 bg-zinc-100 text-zinc-800 rounded-lg text-xs sm:text-sm font-medium">
                       IPX-920
                     </code>
-                    <code className="px-2.5 sm:px-3 py-1.5 bg-gray-100 text-black rounded-lg text-xs sm:text-sm font-medium border border-gray-300">
+                    <code className="px-2.5 sm:px-3 py-1.5 bg-zinc-100 text-zinc-800 rounded-lg text-xs sm:text-sm font-medium">
                       WAAA-412
                     </code>
                   </div>
@@ -172,7 +172,7 @@ export function PlaylistItemsTable({
               </>
             ) : (
               <>
-                <Search className="h-12 w-12 sm:h-16 sm:w-16 text-gray-300 mx-auto mb-4" />
+                <Search className="h-10 w-10 text-gray-300 mx-auto mb-4" />
                 <h3 className="text-base sm:text-lg font-semibold text-black mb-2">
                   No results found
                 </h3>
@@ -183,7 +183,7 @@ export function PlaylistItemsTable({
             )}
           </div>
         ) : (
-          <div className="rounded-lg border border-gray-200 overflow-x-auto">
+          <div className="rounded-xl overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow className="bg-gray-50 hover:bg-gray-50">
@@ -227,7 +227,7 @@ export function PlaylistItemsTable({
                       </TableCell>
                       <TableCell className="font-mono text-black text-xs sm:text-sm hidden sm:table-cell">{item.videoCode}</TableCell>
                       <TableCell>
-                        <code className="px-2 sm:px-2.5 py-1 sm:py-1.5 bg-gray-100 border border-gray-300 text-black rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap">
+                        <code className="px-2 sm:px-2.5 py-1 sm:py-1.5 bg-zinc-100 text-zinc-800 rounded-lg text-xs sm:text-sm font-semibold whitespace-nowrap">
                           {item.normalizedCode}
                         </code>
                       </TableCell>

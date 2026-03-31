@@ -96,7 +96,7 @@ export function AddItemsToPlaylistDialog({
     <Button
       variant="outline"
       size="sm"
-      className="border-2 border-black hover:bg-black hover:text-white"
+      className=""
     >
       <Plus className="h-4 w-4 mr-2" />
       Add to My Playlist
@@ -106,7 +106,7 @@ export function AddItemsToPlaylistDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{trigger || defaultTrigger}</DialogTrigger>
-      <DialogContent className="sm:max-w-[500px] border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+      <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-black">
             Add Items to Your Playlist
@@ -118,7 +118,7 @@ export function AddItemsToPlaylistDialog({
 
         <form onSubmit={handleAdd} className="space-y-6 mt-4">
           {/* Preview Codes */}
-          <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-4">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
             <p className="text-sm font-semibold text-gray-600 mb-2">CODES TO ADD</p>
             <div className="flex flex-wrap gap-2">
               {items.slice(0, 5).map((item) => (
@@ -147,7 +147,7 @@ export function AddItemsToPlaylistDialog({
                 <Loader2 className="h-6 w-6 animate-spin text-gray-400" />
               </div>
             ) : userPlaylists.length === 0 ? (
-              <div className="text-center py-8 bg-gray-50 border-2 border-gray-200 rounded-lg">
+              <div className="text-center py-8 bg-gray-50 border border-gray-200 rounded-lg">
                 <FolderPlus className="h-12 w-12 text-gray-300 mx-auto mb-3" />
                 <p className="text-sm text-gray-600 mb-4">
                   You don't have any playlists yet
@@ -159,14 +159,14 @@ export function AddItemsToPlaylistDialog({
                     setOpen(false)
                     router.push("/dashboard/new")
                   }}
-                  className="bg-black hover:bg-gray-800 text-white"
+                  className=""
                 >
                   Create Your First Playlist
                 </Button>
               </div>
             ) : (
               <Select value={selectedPlaylistId} onValueChange={setSelectedPlaylistId}>
-                <SelectTrigger className="border-2 border-gray-300 focus:border-black">
+                <SelectTrigger className="border border-gray-300 focus:border-gray-500">
                   <SelectValue placeholder="Choose a playlist..." />
                 </SelectTrigger>
                 <SelectContent>
@@ -187,20 +187,20 @@ export function AddItemsToPlaylistDialog({
 
           {/* Actions */}
           {userPlaylists.length > 0 && (
-            <div className="flex items-center gap-3 pt-4 border-t-2 border-gray-200">
+            <div className="flex items-center gap-3 pt-4 border-t border-gray-200">
               <Button
                 type="button"
                 variant="outline"
                 onClick={() => setOpen(false)}
                 disabled={isLoading}
-                className="flex-1 border-2 border-gray-300"
+                className="flex-1"
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
                 disabled={isLoading || !selectedPlaylistId}
-                className="flex-1 bg-black hover:bg-gray-800 text-white"
+                className="flex-1"
               >
                 {isLoading ? (
                   <>

@@ -349,7 +349,7 @@ export function UnifiedAddVideosDialog({
             </Button>
             <Button
               type="submit"
-              className="bg-black hover:bg-gray-800 text-white"
+              className=""
               disabled={loading || !isValid}
             >
               {mode === "single" ? (

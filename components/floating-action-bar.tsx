@@ -43,7 +43,7 @@ export function FloatingActionBar({
 
       {/* Action bar */}
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-4 sm:pb-6">
-        <div className="bg-white border-2 border-blue-200 rounded-2xl shadow-2xl overflow-hidden">
+        <div className="bg-white border border-gray-200 rounded-2xl shadow-lg overflow-hidden">
           {/* Header */}
           <div className="bg-gradient-to-r from-blue-500 to-indigo-500 px-4 sm:px-6 py-3 sm:py-4">
             <div className="flex items-center justify-between">

@@ -33,10 +33,10 @@ export default async function DashboardPage() {
       {/* Header Section */}
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-6">
         <div>
-          <h1 className="text-3xl sm:text-4xl font-bold text-black tracking-tight">My Playlists</h1>
-          <p className="text-gray-600 mt-2 text-base sm:text-lg">Manage your video code collections</p>
+          <h1 className="text-2xl sm:text-3xl font-semibold text-zinc-900 tracking-tight">My Playlists</h1>
+          <p className="text-zinc-500 mt-1 text-sm sm:text-base">Manage your video code collections</p>
         </div>
-        <Button asChild size="lg" className="bg-black hover:bg-gray-800 text-white">
+        <Button asChild size="lg">
           <Link href="/dashboard/new">
             <Plus className="h-4 w-4 mr-2" />
             New Playlist
@@ -46,16 +46,16 @@ export default async function DashboardPage() {
 
       {/* Content Section */}
       {playlists.length === 0 ? (
-        <div className="bg-white border border-gray-200 rounded-lg shadow-soft">
-          <div className="flex flex-col items-center justify-center py-16 sm:py-20 lg:py-24 px-6">
-            <ListVideo className="h-16 w-16 sm:h-20 sm:w-20 text-black mb-6" strokeWidth={1} />
-            <h3 className="text-xl sm:text-2xl font-bold text-black mb-3">
+        <div className="bg-white border border-zinc-200/80 rounded-xl">
+          <div className="flex flex-col items-center justify-center py-12 px-6">
+            <ListVideo className="h-10 w-10 sm:h-12 sm:w-12 text-zinc-300 mb-4" strokeWidth={1.5} />
+            <h3 className="text-lg sm:text-xl font-semibold text-zinc-800 mb-2">
               No playlists yet
             </h3>
-            <p className="text-gray-600 text-center mb-8 max-w-md text-base sm:text-lg">
+            <p className="text-zinc-500 text-center mb-6 max-w-md text-sm sm:text-base">
               Create your first playlist to start organizing your video codes.
             </p>
-            <Button asChild size="lg" className="bg-black hover:bg-gray-800 text-white">
+            <Button asChild size="lg">
               <Link href="/dashboard/new">
                 <Plus className="h-5 w-5 mr-2" />
                 Create Your First Playlist
@@ -67,29 +67,29 @@ export default async function DashboardPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {playlists.map((playlist: typeof playlists[0]) => (
             <Link key={playlist.id} href={`/playlist/${playlist.id}`} className="group">
-              <div className="bg-white border border-gray-200 rounded-lg shadow-soft hover:shadow-elevated transition-all h-full overflow-hidden group-hover:border-black">
+              <div className="bg-white border border-zinc-200/80 rounded-xl hover:border-zinc-300 hover:shadow-sm transition-all duration-150 h-full overflow-hidden">
                 <div className="p-6">
                   <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-lg font-bold text-black transition-colors line-clamp-1">
+                    <h3 className="text-lg font-semibold text-zinc-900 transition-colors line-clamp-1">
                       {playlist.name}
                     </h3>
                     {playlist.isPublic && (
-                      <span className="inline-flex items-center text-xs bg-black text-white px-2.5 py-1 rounded font-medium ml-2 flex-shrink-0">
+                      <span className="inline-flex items-center text-xs bg-zinc-900 text-white px-2.5 py-1 rounded-md font-medium ml-2 flex-shrink-0">
                         Public
                       </span>
                     )}
                   </div>
                   {playlist.description && (
-                    <p className="text-sm text-gray-600 line-clamp-2 mb-4">
+                    <p className="text-sm text-zinc-500 line-clamp-2 mb-4">
                       {playlist.description}
                     </p>
                   )}
-                  <div className="pt-4 border-t border-gray-200 space-y-2">
-                    <div className="flex items-center text-sm text-black">
-                      <span className="font-bold">{playlist._count.items}</span>
-                      <span className="text-gray-500 ml-1">{playlist._count.items === 1 ? 'code' : 'codes'}</span>
+                  <div className="pt-4 mt-4 border-t border-zinc-100 space-y-2">
+                    <div className="flex items-center text-sm text-zinc-900">
+                      <span className="font-semibold">{playlist._count.items}</span>
+                      <span className="text-zinc-400 ml-1">{playlist._count.items === 1 ? 'code' : 'codes'}</span>
                     </div>
-                    <div className="text-xs text-gray-500">
+                    <div className="text-xs text-zinc-400">
                       Updated {new Date(playlist.updatedAt).toLocaleDateString()}
                     </div>
                   </div>
@@ -102,12 +102,12 @@ export default async function DashboardPage() {
 
       {/* Favorites Section */}
       {favorites.length > 0 && (
-        <div className="space-y-4 sm:space-y-6 border-t border-gray-200 pt-8">
+        <div className="space-y-4 sm:space-y-6 pt-6">
           <div className="flex items-center gap-3">
-            <Heart className="h-6 w-6 text-black fill-current" />
+            <Heart className="h-5 w-5 text-zinc-900 fill-current" />
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-black tracking-tight">Favorite Playlists</h2>
-              <p className="text-gray-600 mt-1 text-sm sm:text-base">Public playlists you've saved</p>
+              <h2 className="text-xl sm:text-2xl font-semibold text-zinc-900 tracking-tight">Favorite Playlists</h2>
+              <p className="text-zinc-400 mt-1 text-sm">Public playlists you've saved</p>
             </div>
           </div>
 
@@ -117,26 +117,26 @@ export default async function DashboardPage() {
               const creatorName = playlist.user.displayName || playlist.user.email.split('@')[0]
               return (
                 <Link key={favorite.id} href={`/share/${playlist.shareSlug}`} className="group">
-                  <div className="bg-white border border-gray-200 rounded-lg shadow-soft hover:shadow-elevated transition-all h-full overflow-hidden group-hover:border-black">
+                  <div className="bg-white border border-zinc-200/80 rounded-xl hover:border-zinc-300 hover:shadow-sm transition-all duration-150 h-full overflow-hidden">
                     <div className="p-6">
                       <div className="flex justify-between items-start mb-3">
-                        <h3 className="text-lg font-bold text-black transition-colors line-clamp-1">
+                        <h3 className="text-lg font-semibold text-zinc-900 transition-colors line-clamp-1">
                           {playlist.name}
                         </h3>
-                        <ExternalLink className="h-4 w-4 text-gray-400 flex-shrink-0 ml-2" />
+                        <ExternalLink className="h-4 w-4 text-zinc-300 flex-shrink-0 ml-2" />
                       </div>
                       {playlist.description && (
-                        <p className="text-sm text-gray-600 line-clamp-2 mb-4">
+                        <p className="text-sm text-zinc-500 line-clamp-2 mb-4">
                           {playlist.description}
                         </p>
                       )}
-                      <div className="pt-4 border-t border-gray-200 space-y-2">
-                        <div className="flex items-center text-sm text-gray-600">
+                      <div className="pt-4 mt-4 border-t border-zinc-100 space-y-2">
+                        <div className="flex items-center text-sm text-zinc-500">
                           <span>By {creatorName}</span>
                         </div>
-                        <div className="flex items-center text-sm text-black">
-                          <span className="font-bold">{playlist._count.items}</span>
-                          <span className="text-gray-500 ml-1">{playlist._count.items === 1 ? 'code' : 'codes'}</span>
+                        <div className="flex items-center text-sm text-zinc-900">
+                          <span className="font-semibold">{playlist._count.items}</span>
+                          <span className="text-zinc-400 ml-1">{playlist._count.items === 1 ? 'code' : 'codes'}</span>
                         </div>
                       </div>
                     </div>

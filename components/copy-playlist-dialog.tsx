@@ -75,12 +75,12 @@ export function CopyPlaylistDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-black hover:bg-gray-800 text-white">
+        <Button>
           <Copy className="h-4 w-4 mr-2" />
           Copy
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[500px] border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+      <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-black">
             Copy Playlist to Your Collection
@@ -92,7 +92,7 @@ export function CopyPlaylistDialog({
 
         <form onSubmit={handleCopy} className="space-y-6 mt-4">
           {/* Preview Info */}
-          <div className="bg-gray-50 border-2 border-gray-200 rounded-lg p-4">
+          <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-semibold text-gray-600">Copying from</p>
@@ -116,7 +116,7 @@ export function CopyPlaylistDialog({
               onChange={(e) => setNewName(e.target.value)}
               placeholder="My Copied Playlist"
               required
-              className="border-2 border-gray-300 focus:border-black"
+              className="border border-gray-300 focus:border-gray-500"
             />
           </div>
 
@@ -130,25 +130,25 @@ export function CopyPlaylistDialog({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Add a description for your new playlist..."
-              className="border-2 border-gray-300 focus:border-black min-h-[80px]"
+              className="border border-gray-300 focus:border-gray-500 min-h-[80px]"
             />
           </div>
 
           {/* Actions */}
-          <div className="flex items-center gap-3 pt-4 border-t-2 border-gray-200">
+          <div className="flex items-center gap-3 pt-4 border-t border-gray-200">
             <Button
               type="button"
               variant="outline"
               onClick={() => setOpen(false)}
               disabled={isLoading}
-              className="flex-1 border-2 border-gray-300"
+              className="flex-1"
             >
               Cancel
             </Button>
             <Button
               type="submit"
               disabled={isLoading}
-              className="flex-1 bg-black hover:bg-gray-800 text-white"
+              className="flex-1"
             >
               {isLoading ? (
                 <>

@@ -48,10 +48,10 @@ export default async function SharedPlaylistPage({ params }: PageProps) {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="border-b-2 border-black bg-black sticky top-0 z-50">
+      <div className="border-b border-zinc-200/80 bg-zinc-900 sticky top-0 z-50">
         <div className="max-w-5xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <Link href="/" className="text-white font-bold text-lg hover:text-gray-300 transition-colors">
+            <Link href="/" className="text-white font-semibold text-lg hover:text-zinc-300 transition-colors">
               AV Number Collector
             </Link>
             {!user && (
@@ -66,16 +66,16 @@ export default async function SharedPlaylistPage({ params }: PageProps) {
       </div>
 
       {/* Playlist Header */}
-      <div className="border-b-2 border-black bg-gray-50">
+      <div className="border-b border-zinc-100">
         <div className="max-w-5xl mx-auto px-4 py-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-black mb-2">
+          <h1 className="text-2xl md:text-3xl font-semibold text-zinc-900 mb-2">
             {playlist.name}
           </h1>
           {playlist.description && (
             <p className="text-lg text-gray-600 mb-4">{playlist.description}</p>
           )}
-          <div className="flex items-center gap-4 text-sm text-gray-600">
-            <span>By <span className="font-semibold text-black">{creatorName}</span></span>
+          <div className="flex items-center gap-4 text-sm text-zinc-500">
+            <span>By <span className="font-medium text-zinc-700">{creatorName}</span></span>
             <span>•</span>
             <span>{playlist.items.length} {playlist.items.length === 1 ? 'video' : 'videos'}</span>
           </div>
@@ -93,7 +93,7 @@ export default async function SharedPlaylistPage({ params }: PageProps) {
           {!user && (
             <div className="mt-6">
               <Link href="/login">
-                <Button variant="outline" className="border-2 border-black hover:bg-black hover:text-white">
+                <Button variant="outline">
                   Sign in to save this playlist
                 </Button>
               </Link>
@@ -113,16 +113,16 @@ export default async function SharedPlaylistPage({ params }: PageProps) {
       </div>
 
       {/* Footer CTA */}
-      <div className="border-t-2 border-black bg-gray-50 py-12 mt-12">
+      <div className="border-t border-zinc-100 py-8 mt-8">
         <div className="max-w-5xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold text-black mb-4">
+          <h2 className="text-xl font-semibold text-zinc-800 mb-3">
             Create Your Own Playlist
           </h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-zinc-500 mb-6 text-sm">
             Organize and share your video collections with custom playlists
           </p>
           <Link href="/login">
-            <Button size="lg" className="bg-black hover:bg-gray-800 text-white">
+            <Button size="lg">
               Get Started
             </Button>
           </Link>
